@@ -1,0 +1,62 @@
+Aspergillus_clavatus	
+Aspergillus_flavus
+Aspergillus_fumigatus
+ src /images/fungal/afumigatus_001.jpg
+ link https://www.vbi.vt.edu/article/articleview/359
+ credit Robert Cramer, Jr and Christopher Lawrence
+ desc Condiophores expressing GFP
+Aspergillus_fumigatus
+ src http://bugs.bio.usyd.edu.au/Mycology/images/Topics/Habitats/AspergillusSporechain.jpg
+ link http://bugs.bio.usyd.edu.au/Mycology/Habitats/airFungi.shtml
+ credit Fungal Biology, University of Sydney
+ desc <i>Aspergillus fumigatus</i> conidiophore
+Aspergillus_nidulans
+Aspergillus_niger
+ src /images/fungal/aniger_001.jpg
+ link http://commons.wikimedia.org/wiki/Image:Aspergillus_nigar_Micrograph.jpg
+ credit Wikimedia Commons
+ desc <i>Aspergillus niger</i> growing on agar. 
+Aspergillus_oryzae
+ src http://www.bio.nite.go.jp/dogan/images/photo/RIB40.jpg
+ link http://www.bio.nite.go.jp/dogan/MicroTop?GENOME_ID=ao
+ desc Aspergillus niger
+ credit National Food Research Institute 
+Aspergillus_terreus
+ src http://www.mycology.adelaide.edu.au/images/terreus2.gif
+ link http://www.mycology.adelaide.edu.au/Fungal_Descriptions/Hyphomycetes_(hyaline)/Aspergillus/terreus.html
+ credit Mycology Online: University of Adelaide
+ desc Conidial head of A. terreus.
+Batrachochytrium_dendrobatidis
+Botrytis_cinerea
+Candida_albicans
+Candida_glabrata
+Candida_guilliermondii
+Candida_lusitaniae
+Candida_tropicalis
+Chaetomium_globosum
+Coprinus_cinereus
+Cryptococcus_neoformans_var_grubii
+Cryptococcus_neoformans_var_neoformans
+ src /images/fungal/cryptococcus_001.jpg
+ link http://en.wikipedia.org/wiki/Image:Cryptococcus_neoformans_using_a_light_India_ink_staining_preparation_PHIL_3771_lores.jpg
+ credit Leanor Haley from CDC archives
+ desc <i>Cryptococcus neoformans</i> under India ink staining preparation
+Debaryomyces_hansenii
+Encephalitozoon_cuniculi
+Eremothecium_gossypii
+Fusarium_oxysporum_lycopersici
+Fusarium_verticillioides
+Gibberella_zeae
+Histoplasma_capsulatum
+Kluyveromyces_lactis
+Lodderomyces_elongisporus
+Magnaporthe_grisea
+Neosartorya_fischeri
+Neurospora_crassa
+Pichia_stipitis
+Puccinia_graminis_tritici
+Pyrenophora_tritici-repentis
+Rhizopus_oryzae
+Schizosaccharomyces_pombe
+Ustilago_maydis
+Yarrowia_lipolytica

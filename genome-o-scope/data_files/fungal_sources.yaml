@@ -1,0 +1,56 @@
+Aspergillus_clavatus
+Aspergillus_flavus
+ TIGR
+   
+  
+Aspergillus_fumigatus
+Aspergillus_nidulans
+Aspergillus_niger
+Aspergillus_oryzae
+Aspergillus_terreus
+Batrachochytrium_dendrobatidis
+ Broad
+  primary http://www.broad.mit.edu/annotation/genome/batrachochytrium_dendrobatidis  
+Botrytis_cinerea
+Candida_albicans
+Candida_glabrata
+Candida_guilliermondii
+Candida_lusitaniae
+Candida_tropicalis
+Chaetomium_globosum
+Coprinus_cinereus
+Cryptococcus_neoformans_var_grubii
+Cryptococcus_neoformans_var_neoformans
+Debaryomyces_hansenii
+Encephalitozoon_cuniculi
+Eremothecium_gossypii
+Fusarium_oxysporum_lycopersici
+Fusarium_verticillioides
+Gibberella_zeae
+Histoplasma_capsulatum
+Kluyveromyces_lactis
+Lodderomyces_elongisporus
+Magnaporthe_grisea
+Neosartorya_fischeri
+Neurospora_crassa
+Pichia_stipitis
+Puccinia_graminis_tritici
+Pyrenophora_tritici-repentis
+Rhizopus_oryzae
+ Broad
+  primary http://www.broad.mit.edu/annotation/fungi/rhizopus_oryzae
+  
+Schizosaccharomyces_japonicus
+ Broad
+  primary http://www.broad.mit.edu/annotation/genome/schizosaccharomyces_japonicus
+  alternative http://www.ncbi.nlm.nih.gov/entrez/viewer.fcgi?db=nuccore&id=116048574
+Schizosaccharomyces_pombe
+ Sanger
+  primary http://www.sanger.ac.uk/Projects/S_pombe/
+  alternative http://www.ncbi.nlm.nih.gov/sites/entrez?db=genomeprj&cmd=Retrieve&dopt=Overview&list_uids=9517  
+Stagonospora_nodorum
+ Broad
+  primary http://www.broad.mit.edu/annotation/genome/stagonospora_nodorum/
+  alternative http://www.ncbi.nlm.nih.gov/entrez/viewer.fcgi?db=nuccore&id=62183523
+Ustilago_maydis
+Yarrowia_lipolytica
