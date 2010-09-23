@@ -1,0 +1,6 @@
+Set up your enviro:
+
+mkdir ~/perllib ; cd ~/perllib
+perl -Mlocal::lib=./ ; eval $(perl -Mlocal::lib=./)
+
+
