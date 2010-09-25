@@ -1,4 +1,4 @@
-package FungiDB::Organize::Repository;
+package FungiDB::Repository;
 
 use Moose;
 use File::Path;
