@@ -17,7 +17,7 @@ BEGIN {
 }
 
 
-ok( my $fungidb = FungiDB->new(),
+ok( my $fungidb = FungiDB->new(debug => 1),
     'instantiated FungiDB class'
     );
 

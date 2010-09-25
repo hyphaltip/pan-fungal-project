@@ -24,8 +24,6 @@ my $all_organisms = $fungidb->organisms;
 ok($all_organisms,'available organisms: ' . join('; ',map { $_->genus . " " . $_->species } @$all_organisms));
 
 
-
-
 ######################################
 #
 # Fetch a single resource and all the
@@ -34,11 +32,11 @@ ok($all_organisms,'available organisms: ' . join('; ',map { $_->genus . " " . $_
 ######################################
 my $source = $fungidb->source('sgd');
 ok ($source->isa("FungiDB::Source::sgd"),
-	"fetching a single source using its symbolic name");
+	"fetching a single source by its symbolic name: sgd");
 
 # Get a list of all organisms provided by this source.
 my $organisms = $source->organisms;
-ok($organisms,'source responsible for: ' . join('; ',map { $_->genus . ' ' . $_->species } @$organisms));
+ok($organisms,$source->title . " responsible for: " . join('; ',map { $_->genus . ' ' . $_->species } @$organisms));
 
 
 
@@ -52,5 +50,5 @@ ok($organisms,'source responsible for: ' . join('; ',map { $_->genus . ' ' . $_-
 #
 ######################################
 my $organism = $fungidb->organism('saccharomyces_cerevisiae');
-ok ($organism->genus eq 'Saccharomyces','fetched a single organism directly: ' . $organism->index_name);
-ok($organism->source eq 'sgd', 'interrogated the organism configuration');
+ok ($organism->genus eq 'Saccharomyces','fetched a single organism directly: ' . $organism->symbolic_name);
+ok($organism->source eq 'sgd', 'interrogated the organism configuration for its source: ' .  $organism->source);
