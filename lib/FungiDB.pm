@@ -5,6 +5,7 @@ use Config::General;
 use Cwd;
 use FungiDB::Factory;
 use File::Spec;
+use Log::Log4perl;
 
 has 'config' => (
 		 is  => 'rw',
@@ -23,6 +24,11 @@ has 'sources' => (
 		   lazy_build => 1
 		   );
 
+has 'log' => ( is => 'ro',
+	       lazy_build => 1);
+
+has 'debug' => ( is => 'rw',
+		 default => 0);
 
 
 # After instantiation, load up our new object with our Config::General
@@ -36,6 +42,13 @@ sub BUILD {
     $self->config(\%config);
 }
 
+sub _build_log {
+    my $self = shift;
+    my $cwd = cwd();
+    Log::Log4perl::init("$cwd/conf/log4perl.conf") or die "couldn't instantiate my logger";
+    my $log = Log::Log4perl::get_logger();
+    return $log;
+}
 
 
 
@@ -80,6 +93,12 @@ sub organism {
     my @organisms = $self->_organism_factory($name);
     return $organisms[0];
 }
+
+sub repository {
+    my $self = shift;
+    my $args = $self->config->{repository};
+    my $repository = $self->_factory("Repository",$args);
+}    
 
 
 sub _factory {

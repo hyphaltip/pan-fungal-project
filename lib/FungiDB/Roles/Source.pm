@@ -15,6 +15,9 @@ has 'title' => ( is  => 'ro',
 has 'organisms' => (is => 'ro',
 		    lazy_build => 1);
 
+has 'base_url' => ( is => 'ro',
+		    lazy_build => 1);
+
 #has 'source'    => (is => 'ro',
 #		    lazy_build => 1);#
 
@@ -37,6 +40,13 @@ sub _build_title {
     my $name = $self->symbolic_name;
     my $title = $self->config->{source}->{$name}->{title};
     return $title;
+}
+
+sub _build_base_url {
+    my $self = shift;
+    my $name = $self->symbolic_name;
+    my $url = $self->config->{source}->{$name}->{base_url};
+    return $url;
 }
 
 

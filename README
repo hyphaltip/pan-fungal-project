@@ -4,3 +4,12 @@ mkdir ~/perllib ; cd ~/perllib
 perl -Mlocal::lib=./ ; eval $(perl -Mlocal::lib=./)
 
 
+
+
+
+lib/
+lib/FungiDB
+lib/FungiDB/Source - *.pm for each source
+    Sources describe how to fetch data from them.
+lib/FungiDB/Organism - *pm for each organism
+    Organisms know their source and any special attributes about their data.
