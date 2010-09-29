@@ -53,8 +53,6 @@ sub _build_species_directories {
 # saccharomyces_cerevisiae/{STRAIN}/{VERSION}
 # saccharomyces_cerevisiae/{STRAIN}/{VERSION}/README
 # saccharomyces_cerevisiae/{STRAIN}/{VERSION}/VERSION
-# saccharomyces_cerevisiae/{STRAIN}/{VERSION}/gff
-# saccharomyces_cerevisiae/{STRAIN}/{VERSION}/sequence
 # saccharomyces_cerevisiae/current -> {STRAIN}/{VERSION}
 
 sub establish {
@@ -118,14 +116,18 @@ sub by_species {
 	
 	my $strains = $organism->strains;
 	foreach my $strain (@$strains) {
-	    my $species_directories = $self->species_directories();
-	    foreach my $dir (@$species_directories) {
-		
-		mkpath("$root/by_species/$species/$strain/$version/$dir",
-		       { verbose => $self->debug,
-			 mode    => 0775,
-		     });		   
-	    }
+	    # No longer in use, but retain for later.
+#	    my $species_directories = $self->species_directories();
+#	    foreach my $dir (@$species_directories) {
+#	    mkpath("$root/by_species/$species/$strain/$version/$dir",
+#		   { verbose => $self->debug,
+#		     mode    => 0775,
+#		 });		   
+#	}
+	    mkpath("$root/by_species/$species/$strain/$version",
+		   { verbose => $self->debug,
+		     mode    => 0775,
+		 });		   
 	}
 	
 	# Symlink to the current version. This really belongs in
@@ -163,16 +165,15 @@ sub mirror_file_by_http {
     mkpath($full_path,
 	   { verbose => $self->debug,
 	     mode => 0775,
-	 });
-    
+	 });    
 
     if ($self->debug) {
-	$self->log->debug("Since we are in debug mode, we won't actually download $filename to $path...");
+	$self->log->debug("Since we are in debug mode, we won't actually download $filename to $path...") if $self->debug;
     } else {
 	my $response = $mech->mirror($url,"$full_path/$filename");
 	
 	if ( $response->is_success() ) {
-	    $self->log->info("successfully mirrored $filename to $full_path");
+	    $self->log->info("successfully mirrored $filename to $full_path");	    
 	} else {
 	    $self->log->die("Crap. Something went wrong mirroring $filename at $url");
 	}

@@ -32,7 +32,15 @@ my $organisms = $source->organisms;
 ok($organisms,$source->title . " responsible for: " . join('; ',map { $_->genus . ' ' . $_->species } @$organisms));
 
 
+my $urls = $source->download_index_page_urls();
+#foreach (keys %$urls) {
+#	print "$urls->{$_}: $_\n";
+#	}	
+
+$source->slurp_all($urls);
+
+
 # Update the mirror for all organisms from this source
-foreach my $organism (@$organisms) {
-     $source->slurp($organism);
-}
+#foreach my $organism (@$organisms) {
+#     $source->slurp($organism);
+#}

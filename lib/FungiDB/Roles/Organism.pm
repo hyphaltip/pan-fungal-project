@@ -23,6 +23,7 @@ has 'index_url' => (is => 'ro',
 has 'file_template' => (is => 'ro',
 			lazy_build => 1);
 
+
 sub _build_source {
     my $self = shift;
     my $name = $self->symbolic_name;

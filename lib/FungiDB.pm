@@ -31,6 +31,12 @@ has 'debug' => ( is => 'rw',
 		 default => 0);
 
 
+has 'version_history' => ( is => 'rw',
+			   lazy_build => 1);
+
+
+
+
 # After instantiation, load up our new object with our Config::General
 sub BUILD {
     my $self = shift;
@@ -140,6 +146,48 @@ sub _source_factory {
 }
 
 
+
+# First request? Get the values from the 
+sub _build_version_history {    
+    my ($self,$data) = @_;
+    
+    my $cwd = cwd();
+    open my $log, '<',"$cwd/species_update.log" or die "Couldn't open the species_update.log: $!";
+
+    my @fields = qw/species strain version downloadpath source date_last_checked date_last_updated/;
+    
+    my %species;
+    while (<$log>) {
+	my @fields = split("\t");
+	my $c = 0;
+	foreach (@fields) {
+	    $species{$_} = $fields[$c];
+	}
+    }
+}
+
+
+
+
+sub dump_version_history { 
+    my ($self,$data) = @_;
+    my $cwd = cwd();
+    my $date = `date +%Y-%m-%d`;
+    chomp $date;
+
+    my @fields = qw/species strain version path source/;
+    
+    my $log_file = "$cwd/species_update-$date.log";
+    unless ( -e $log_file) {
+	system("touch $log_file");
+	open my $log, '>',"$log_file" or die "Couldn't open the species_update.log: $!";
+	print $log join("\t",@fields). "\n";
+	close $log;
+    }
+    
+    open my $log, '>',"$log_file" or die "Couldn't open the species_update.log: $!";    
+    print $log join("\t",map { $data->{$_} } @fields) . "\n";
+}
 
 
 
