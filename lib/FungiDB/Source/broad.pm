@@ -73,6 +73,8 @@ sub download_index_page_urls {
 	next if ($url =~ /comp_yeasts/);
 	next if ($url =~ /chaetomium_globosum/);
 	next if ($url =~ /lacazia/);
+	next if ($url =~ /pyrenophora_tritici_repentis/);
+	next if ($url =~ /botrytis_cinerea/);
 	$url = ($url =~ /^h/) ? $url : $self->base_url . $url;
 	
 	# Guess the download page and build the url.
@@ -87,6 +89,11 @@ sub download_index_page_urls {
 	    # Append the downloads link
 	    $url .= 'MultiDownloads.html';
 	    $links{$url} = $link->text;   # Maybe species
+
+	    # Try substituting genome for fungi just in case
+	    # Doens't quite work
+#	    $url =~ s/fungi/genome/g;
+#	    $links{$url} = $link->text;   # Maybe species
 
 	} 
 	
@@ -249,7 +256,7 @@ sub slurp_all {
 	my $full_url = ($url =~ /^h/) ? $url : $self->base_url . $url;
 	if ($mech->get($full_url)) {
 	
-	    $self->log->debug("Succesfully fetched the download page at $url");
+	    $self->log->info("Succesfully fetched the download page at $url");
 	    
 	    my $compression = $self->preferred_compression;
 	    

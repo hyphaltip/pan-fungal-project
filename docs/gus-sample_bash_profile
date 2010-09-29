@@ -1,0 +1,151 @@
+# .bash_profile
+
+# Get the aliases and functions
+if [ -f ~/.bashrc ]; then
+        . ~/.bashrc
+fi
+
+# User specific environment and startup programs
+PATH=$PATH:$HOME/bin
+
+export PATH
+
+export BASH_ENV=$HOME/.bashrc
+
+unset USERNAME
+
+# Dynamically set the prompt based on hostname and/or architecture.
+function prompt {
+    local        BLACK="\[\033[0;30m\]"
+    local         BLUE="\[\033[0;34m\]"
+    local        GREEN="\[\033[0;32m\]"
+    local         CYAN="\[\033[0;36m\]"
+    local          RED="\[\033[0;31m\]"
+    local       PURPLE="\[\033[0;35m\]"
+    local        BROWN="\[\033[0;33m\]"
+    local   LIGHT_GRAY="\[\033[0;37m\]"
+    local    DARK_GRAY="\[\033[1;30m\]"
+    local   LIGHT_BLUE="\[\033[1;34m\]"
+    local  LIGHT_GREEN="\[\033[1;32m\]"
+    local   LIGHT_CYAN="\[\033[1;36m\]"
+    local    LIGHT_RED="\[\033[1;31m\]"
+    local LIGHT_PURPLE="\[\033[1;35m\]"
+    local       YELLOW="\[\033[1;33m\]"
+    local        WHITE="\[\033[1;37m\]"
+    local      NOCOLOR="\[\033[0m\]"     # unsets color to term's fg color
+    local         ROOT=$RED
+
+    # emphasized (bolded) colors
+    local EMK="\[\033[1;30m\]"
+    local EMR="\[\033[1;31m\]"
+    local EMG="\[\033[1;32m\]"
+    local EMY="\[\033[1;33m\]"
+    local EMB="\[\033[1;34m\]"
+    local EMM="\[\033[1;35m\]"
+    local EMC="\[\033[1;36m\]"
+    local EMW="\[\033[1;37m\]"
+    
+    # background colors
+    local BGK="\[\033[40m\]"
+    local BGR="\[\033[41m\]"
+    local BGG="\[\033[42m\]"
+    local BGY="\[\033[43m\]"
+    local BGB="\[\033[44m\]"
+    local BGM="\[\033[45m\]"
+    local BGC="\[\033[46m\]"
+    local BGW="\[\033[47m\]"
+    
+
+    # Set the titlebar to something informative
+    case $TERM in
+	xterm* | rxvt* | vt100* | xterm-color*)
+	    local TITLEBAR='\[\033]0;\u@\h:\w\007\]'
+	    ;;
+	*)
+	    local TITLEBAR=""
+	    ;;
+    esac
+
+    # Set the base, user, and highlight colors
+    local HIGHLIGHT=$WHITE
+    local UC=$WHITE             # user's color
+    case $1 in
+	blue)
+	  HIGHLIGHT=$BLUE
+	  UC=$BLUE
+	  ;;
+	red)
+	  HIGHLIGHT=$RED
+	  UC=$RED
+	  ;;
+	green)
+	  HIGHLIGHT=$GREEN
+	  UC=$GREEN
+	  ;;
+    esac
+    
+    # Override PS2 and the user color for root.
+    # Root is ALWAYS red and uses the money prompt
+    PS2='> '
+    if ([ $UID -eq "0" ]) then
+	UC=$RED
+	PS2='$ '
+    fi
+
+    PS1="$HIGHLIGHT[$UC\u${HIGHLIGHT}@\h: \W]${NOCOLOR}$PS2"
+    PS4='+ '
+}
+
+
+HOSTNAME=`hostname`
+case $HOSTNAME in
+    salmon.local)
+	alias restart_web='sudo /usr/local/apache/bin/apachectl restart'    
+	prompt green
+	;;
+    poudre.local)
+	prompt green
+	;;
+    *)
+	prompt red
+	;;
+esac
+
+alias ro='rm -f *~';
+
+#for the build system
+export GUS_HOME=$HOME/gusApps/FungiDB/gus_home
+export PROJECT_HOME=$HOME/gusApps/FungiDB/project_home
+export ANT_HOME=/files/cbil/software/ant/apache-ant-1.6.2
+export JAVA_HOME=/files/cbil/software/java/current
+export POSEIDON_HOME=/files/cbil/software/poseidonCE-2.1.2
+
+export wdkm=$PROJECT_HOME/WDK/Model/src/java/org/gusdb/wdk/model
+export wdkc=$PROJECT_HOME/WDK/Controller/src/java/org/gusdb/wdk/controller
+export wdkv=$PROJECT_HOME/WDK/View/src/java/org/gusdb/wdk/view
+
+# Oracle
+#export ORACLE_HOME=/files/oracle
+export ORACLE_HOME=/u01/app/oracle/product/11.2.0
+#export LD_LIBRARY_PATH=$ORACLE_HOME/lib:$LD_LIBRARY_PATH
+export LD_LIBRARY_PATH=$ORACLE_HOME/lib
+
+# PATH
+export PRE_GUS_PATH=$HOME/mybin:/files/cbil/bin
+export POST_GUS_PATH=$ANT_HOME/bin:$JAVA_HOME/bin:$POSEIDON_HOME/bin:${PATH}:$ORACLE_HOME/bin
+export PATH=${PRE_GUS_PATH}:$PROJECT_HOME/install/bin:$GUS_HOME/bin:$POST_GUS_PATH:./
+export PATH=$ORACLE_HOME/bin:$PATH
+#export PERL5LIB=$GUS_HOME/lib/perl
+export PERL5LIB=/mnt/apidb/perl/lib64/perl5/site_perl/5.8.8/x86_64-linux-thread-multi:$GUS_HOME/lib/perl/
+alias gusenv='source $PROJECT_HOME/install/bin/gusEnv.bash';
+
+export HISTSIZE=5000
+
+#function setClassPath () {
+#  for JAR in $GUS_HOME/lib/java/*.jar
+#  do
+#    export CLASSPATH=$JAR:$CLASSPATH
+#  done
+#}
+
+umask 002 
