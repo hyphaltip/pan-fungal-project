@@ -43,7 +43,7 @@ append_to_conf(\%args);
 sub create_organism_module {
     my ($g,$s) = @_;
     my $package = lc($g) . '_' . $s;
-    open my $module,'>',"$Bin/../lib/FungiDB/Organism/$package.pm" or die "Couldn't open the module for writing': $!";
+    open my $module,'>',"$Bin/../lib/perl/FungiDB/Organism/$package.pm" or die "Couldn't open the module for writing': $!";
 
     print $module <<END;
 package FungiDB::Organism::$package;

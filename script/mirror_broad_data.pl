@@ -2,7 +2,7 @@
 
 use strict;
 use FindBin qw/$Bin/;
-use lib "$Bin/../lib";
+use lib "$Bin/../lib/perl";
 use FungiDB;
 
 my $fungidb = FungiDB->new();
