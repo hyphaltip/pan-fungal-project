@@ -1,0 +1,86 @@
+#TaxonID ScientificName	Strain	Accessions	
+#Ashbya gossypii	NC_005782-NC_005789
+#344612	Aspergillus clavatus	NRRL 1	NZ_AAKD00000000
+#344612	Aspergillus clavatus	NRRL 1	NW_001510342-NW_001510464,NW_001517093-NW_001517112
+#330879	Aspergillus fumigatus	Af293	NZ_AAHF00000000
+330879	Aspergillus fumigatus	Af293	NC_007194-NC_007201
+451804	Aspergillus fumigatus	A1163	ABDB00000000
+#451804	Aspergillus fumigatus	A1163	DS499594-DS499648
+
+222929	Coccidoides posadasii	C735	ACFW00000000
+#222929	Coccidoides posadasii	C735	ACFW01000001-ACFW01000055
+214684	Cryptococcus neoformans var neoformans	JEC21	AE017341-AE017353,AE017356
+283643	Cryptococcus neoformans var neoformans	B-3501	NZ_AAEY01000000
+#283643	Cryptococcus neoformans var neoformans	B-3501	NC_009177-NC_009190
+331117	Neosartorya fisheri	NRRL 181	NZ_AAKE00000000
+#331117	Neosartorya fisheri	NRRL 181	DS027117-DS028092
+
+500485	Penicillium chrysogenum WI-54-125	NS_000201
+#441960	Penicillium_marneffei	NZ_ABAR00000000
+#441960	Penicillium_marneffei	ATCC 18224	NW_002196661-NW_002197112
+#441960	Penicillium_marneffei	ATCC 18224	ABAR01000000
+#Talaromyces_stipitatus	ABAS01000000
+
+
+#Ascosphaera_apis	CH980625-CH981371
+#Aspergillus_oryzae	AP007150-AP007177
+#Aspergillus_niger_513.88	NT_166518-NT_166533,NT_166537-NT_16653
+#Aspergillus_nidulans	CH236920-CH236936
+#Aspergillus_flavus	AAIH02000000
+#Aspergillus_terreus_NIH2624	CH476594-CH476614,CH981535-CH981540
+#Aspergillus_terreus_NIH2624	NT_165925-NT_165942,NT_165944-NT_165951,NT_165972
+#Aspergillus_terreus_ATCC_20542	AABT01000000
+#Batrachochytrium_dendrobatidis_JEL423	DS022300-DS022322
+#Botrytris_cinerea_B05.10	NW_001813983-NW_001814571
+#Botrytris_cinerea_B05.10	CH476842-CH477126,DS264920-DS265223
+#Candida_albicans_WO-1	CM000309-CM000313,CH672346-CH672354
+#Candida_albicans_SC5314	AACQ01000000
+#Candida_glabrata	NC_005967-NC_005968,NC_006026-NC_006036
+#Candida_tropicalis	CH408059-CH408075
+#Chaetomium_globosum	NT_165976-NT_165989,NT_166001-NT_166024
+#Candida_lusitaniae	CH408076-CH408083
+#Cryptococcus_gattii_R265	CH408163-CH408188
+#Debaryomyces_hansenii	NC_006043-NC_006049
+#Encephalitozoon_cuniculi	NC_003242,NC_003229-NC_003238
+#Enterocytozoon_bieneusi_H348	CH991540-CH991542
+#Enterocytozoon_bieneusi_H348	ABGB01000001-ABGB01001743
+#Fusarium_oxysporum	DS231696-DS231812
+#Fusarium_verticillioides	DS022242-DS022271,DS486009-DS486014
+#Gibberella_zeae_PH-1	NT_086521,NT_086522,NT_086532,NT_086543,NT_086552,NT_086557,NT_086559-NT_086561
+# Fusarium_graminearum	DS231663-DS231695
+#Histoplasma_G186AR	ABBS01000000
+#Histoplasma_NAm1	CH476655-CH476725,DS264711-DS264919
+#Histoplasma_217B	
+#Kluyveromyces_lactis	NC_006037-NC_006042
+#Kluyveromyces_waltii	AADM01000000
+#Laccaria bicolor	DS547091-DS547755
+#Lodderomyces_elongisporus	NW_001813675-NW_001813702
+#Magnaorthe_grisea	NW_001798636-NW_001798953
+#Neurospora_crassa	AABX00000000
+#Pichia_guilliermondii	NW_001809792-NW_001809800
+#Pichia_stipitis	NC_009068,NC_009042-NC_009048
+#Podospora_anserina_DSM_980	NW_001914859,NW_001914829-NW_001914859
+#Postia_placenta
+#Pyrenophora_tritici-repentis	DS231615-DS231662
+#Rhizopus_oryzae	CH476732-CH476759
+#Saccharomyces_bayanus_623-6C	AACG02000000
+#Saccharomyces_bayanus_MCYC_623	AACA01000000
+#Saccharomyces_castellii	AACF01000000
+#Saccharomyces_cerevisiae_YJM789	AAFW02000000
+#Saccharomyces_cerevisiae_RM11-1A	CH408043-CH408058
+#Saccharomyces_kluyveri	AACE02000000
+#Saccharomyces_kudriavzevii	AACI02000000
+#Saccharomyces_mikatae_IFO	AACH01000000
+#Saccharomyces_paradoxus	AABY01000000
+#Schizosaccharomyces_japonicus	DS022224-DS022241
+#Schizosaccharomyces_pombe	NC_003421,NC_003423-NC_003424,NC_003426
+#Sclerotinia_sclerotiorum	NW_001820797-NW_001820835
+#Trichoderma_atroviride	ABDG01000000
+#Trichoderma_virens	ABDF01000000
+#Trichoderma_reesei	CH475227-CH475396
+#Uncinocarpus_reesii	CH476615-CH476620
+#Ustilago_maydis	AACP01000000
+#Kluyveromyces_polysporus	DS480378-DS480658
+#Yarrowia_lipolytica	NC_006067-NC_006072
+#Stagonospora_nodorum	CH445325-CH445394,CH959327-CH959365
+#Vanderwaltozyma_polyspora_DSM_70294	DS480378-DS480658
