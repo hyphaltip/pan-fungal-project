@@ -10,24 +10,26 @@ extends FungiDB;
 
 # Dump out a rather generic datasource file for a new organism
 sub generate_isf_datasource {
-    my ($self,$genus,$species,$strain) = @_;
+    my ($self,$genus_species,$strain,$description) = @_;
     
     # filenames are located at ApiCommonData/Load/lib/xml/datasources/fungidb;    
     # filenames are "genus_species_strain.xml", eg cryptococcus_neoformans_grubii_h99.xml
     
     # A symbolic name, used both in the database as well as for file names.
-    my $symbolic_name = join("_",$genus,$species,$strain);
+    my $symbolic_name = join("_",$genus_species,$strain);
     
     my $filename = "$symbolic_name.xml";
+
+    my $root = '/home/tharris/tmp';
     
-    my $fh = new IO::File(">$root/$filename");
-    my $write = new XML::Writer(OUTPUT => $fh);
+    my $fh = new IO::File(">$root/$filename") or die "$!";
+    my $writer = new XML::Writer(OUTPUT => $fh);
     
     my $date = `date +%Y-%m-%d`;
     chomp $date;
     
     $writer->startTag('resources');
-    $writer->comment("$genus $species, strain $strain ISF resource; generated $date");
+    $writer->comment("$genus_species, strain $strain ISF resource; generated $date");
 
     # FASTA
     $writer->startTag('resource',
@@ -51,17 +53,16 @@ sub generate_isf_datasource {
     $writer->startTag('pluginArgs');
     $writer->comment('The following arguments may need to be tweaked depending on source: ncbiTaxId, regexChromosome, regexSourceId, SOTermName');
     
-    my $seq_file = $symbolic_name . '_supercontigs.fasta';
-    $writer->raw(
-		 qq[--externalDatabaseName %RESOURCE_NAME%                   
-		    --externalDatabaseVersion %RESOURCE_VERSION%
-		    --sequenceFile @@dataDir@@/$seq_file 
-		    --tableName "DoTS::ExternalNASequence" 
-		    --ncbiTaxId $taxon_id 
-		    --regexChromosome '\d+\.(\d+)'
-		    --regexSourceId  '>(\S+)' 
-		    --SOTermName 'chromosome'
-		    ]);
+    $writer->raw(join(' ',
+		      '--externalDatabaseName %RESOURCE_NAME%',
+		      ' --externalDatabaseVersion %RESOURCE_VERSION%',
+		      '--sequenceFile @@dataDir@@/' . $symbolic_name . '_supercontigs.fasta',
+		      '--tableName "DoTS::ExternalNASequence"',
+		      "--ncbiTaxId $taxon_id",
+		      "--regexChromosome '\d+\.(\d+)'",
+		      "--regexSourceId  '>(\S+)'",
+		      "--SOTermName 'chromosome'",
+		      ));
     $writer->endTag();   # </pluginArgs>
     
     # Meta
@@ -113,21 +114,21 @@ sub generate_isf_datasource {
     $writer->startTag('pluginArgs');
     $writer->comment('The following arguments may need to be tweaked depending on source: mapFile');
     
-    $writer->raw(
-		 qq[--mapFile @@gusHome@@/lib/xml/isf/FungiDB/broadGFF32Gus.xml
-		    --inputFileExtension "gff"
-		    --fileFormat gff3
-		    --defaultOrganism "Cryptococcus neoformans var. grubii H99"
-		    --seqSoTerm "chromosome"
-		    --extDbName %PARENT_RESOURCE_NAME%
-		    --extDbRlsVer %PARENT_RESOURCE_VERSION%
-		    --inputFileOrDir @@dataDir@@/$symbolic_name.transformed.gff
-		    --soCvsVersion @@SO_VER@@
-		    --validationLog @@dataDir@@/validation.log 
-		    --bioperlTreeOutput @@dataDir@@/bioperlTree.out
-		    --seqIdColumn source_id
-		    --naSequenceSubclass ExternalNASequence
-		    ]);
+    $writer->raw(join(' ',
+		      '--mapFile @@gusHome@@/lib/xml/isf/FungiDB/broadGFF32Gus.xml',
+		      '--inputFileExtension "gff"',
+		      '--fileFormat gff3',
+		      '--defaultOrganism "Cryptococcus neoformans var. grubii H99"',
+		      '--seqSoTerm "chromosome"',
+		      '--extDbName %PARENT_RESOURCE_NAME%',
+		      '--extDbRlsVer %PARENT_RESOURCE_VERSION%',
+		      '--inputFileOrDir @@dataDir@@/' . "$symbolic_name.transformed.gff",
+		      '--soCvsVersion @@SO_VER@@',
+		      '--validationLog @@dataDir@@/validation.log',
+		      '--bioperlTreeOutput @@dataDir@@/bioperlTree.out',
+		      '--seqIdColumn source_id',
+		      '--naSequenceSubclass ExternalNASequence',
+		      ));
     $writer->endTag();   # </pluginArgs>
     
     # Meta
@@ -141,7 +142,7 @@ sub generate_isf_datasource {
 		      email       => '',
 		      institution => '',
 		      );
-        
+    
     # A prose description
     $writer->startTag('description');
     $writer->character("Sequence data from $source");

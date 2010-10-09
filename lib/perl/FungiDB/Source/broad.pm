@@ -179,12 +179,12 @@ sub slurp {
 
 	    # By default, we mirror into species/raw/extracted_organism name.
 	    # This is maybe cleaner as species/STRAIN/raw...
-	    
 	    my $path = join('/',
 			    $organism->symbolic_name
 			    ,$strain || 'unknown-strain',
 			    ,$assembly || 'unknown-assembly',
 				 ,'raw');	    
+
 	    $repository->mirror_file_by_http($mech,
 					     $path,
 					     $full_filename,
@@ -262,6 +262,8 @@ sub slurp_all {
 	    
 	    my %data_types_seen;
 
+	    my $species_object;
+
 	    my @links = $mech->links();    
 	    foreach my $link (@links) {
 		my ($filename,$title) = $self->_check_title_tag($link);
@@ -272,7 +274,7 @@ sub slurp_all {
 		    
 		    my ($full_filename,$genus_species,$strain,$assembly) = $self->_parse_title($title,$filename);
 		    next unless $full_filename;
-		    
+	
 		    # Is this a new update?
 #		    my $is_updated = $self->check_for_updates({species => $genus_species,			
 #							       strain  => $strain,
@@ -299,14 +301,13 @@ sub slurp_all {
 				    ,$assembly,
 				    ,'raw');
 		    
-		    # Save the species, strain, and assembly here. Not necessary for EVERY file.
-		    
-		    $self->dump_version_history({ species => $genus_species,
-						  strain  => $strain,
-						  version => $assembly,
-						  path    => $path,
+		    # Save the species, strain, and assembly here. Not necessary for EVERY file.		    
+		    $self->dump_version_history({ species  => $genus_species,
+						  strain   => $strain,
+						  version  => $assembly,
+						  path     => $path,
 						  filename => $full_filename,
-						  source  => $self->symbolic_name,
+						  source   => $self->symbolic_name,
 					      });
 		    
 		    $self->log->debug("fetching $full_filename: $genus_species; strain: $strain; assembly $assembly\n") if $self->debug;

@@ -109,9 +109,6 @@ sub repository {
 }    
 
 
-sub 
-
-
 sub factory {
     my $self = shift;
     my ($class,$args) = @_;
@@ -159,11 +156,11 @@ sub _build_version_history {
     my $cwd = cwd();
 
     my $log_file = "$cwd/logs/update.log";
-    if (-e $log_file) {
-	open my $log, '<',$log_file or die "Couldn't open the update.log: $!";
-    } else {
+    unless (-e $log_file) {
 	system("touch $log_file");
     }
+
+    open my $log, '<',$log_file or die "Couldn't open the update.log: $!";
     
     my @cols = qw/
 	species
@@ -195,12 +192,12 @@ sub dump_version_history {
     my $cwd = cwd();
     my $date = `date +%Y-%m-%d`;
     chomp $date;
-    $data{date} = $date;
+    $data->{date} = $date;
     
     my @fields = qw/date species strain version source path filename/;
     
 
-    my $log_file = "$cwd/logs/update.log";
+    my $log_file = "$cwd/lib/update.log";
     unless ( -e $log_file) {
 	system("touch $log_file");
 	open my $log, '>',"$log_file" or die "Couldn't open the species_update.log: $!";
@@ -215,15 +212,16 @@ sub dump_version_history {
 
 
 
+
 sub check_for_updates {
     my ($self,$data) = @_;
-    my $species = $data{species};
+    my $species = $data->{species};
 
     my $version_history = $self->version_history;
     
     # What's the previous version?
     my $previous_version = $version_history->{$species}->{version};
-    if ($data{version} > $previous_version) {
+    if ($data->{version} > $previous_version) {
 	
 	# We've been updated. Save.
 #	$self->_save_update

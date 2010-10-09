@@ -23,6 +23,9 @@ has 'index_url' => (is => 'ro',
 has 'file_template' => (is => 'ro',
 			lazy_build => 1);
 
+has 'version' => (is => 'rw',
+		  lazy_build => 1);
+
 
 sub _build_source {
     my $self = shift;
