@@ -29,7 +29,7 @@ sub _build_readme_filename {
     return $self->config->{repository}->{readme_filename};
 }
 
-sub _build_versioN_filename {
+sub _build_version_filename {
     my $self = shift;
     return $self->config->{repository}->{version_filename};
 }
