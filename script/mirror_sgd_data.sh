@@ -5,7 +5,7 @@
 
 # There should be a master config for this.
 DESTINATION_ROOT=/files/cbil/data/cbil/EuPathDB/manualDelivery/FungiDB/saccharomyces_cerevisiae_s288c
-CHROMOSOMES=${DESTINATION_ROOT}/genome/chromosome
+CHROMOSOMES=${DESTINATION_ROOT}/genome
 
 DATE=`date +%Y-%m-%d`
 echo ${CHROMOSOMES}/${DATE}
