@@ -1,0 +1,73 @@
+# config properties used by many steps
+# these are not validated until step run time, so use judiciously
+
+projectName=FungiDB
+projectVersion=1.0
+
+apiSiteFilesDir=/files/cbil/data/cbil/apiSiteFiles
+
+clusterBaseDir=/genomics/binf/scratch
+clusterQueue=apidb
+nodeClass=DJob::DistribJob::SgeNode
+nodePath=/scratch/user/$ENV{USER}
+clusterServer=beta.genomics.upenn.edu
+
+gusHome=$ENV{GUS_HOME}
+
+manualDeliveryDir=/files/cbil/data/cbil/EuPathDB/manualDelivery
+
+# Tuning manager-specific settings
+email=weili1@pcbi.upenn.edu
+instance=fung-rbld
+tuningMangerPassword=po34weep
+
+dbestConnect = dbi:Oracle:dbst100n
+dbestLogin = pinney
+dbestPswd = Xtn34o
+
+# resource versions
+# consumed by both resource and workflow xml
+
+###global
+GO_VER=1.1439
+SO_VER=1.45
+NRDB_VER=2010-09-18
+InterproscanData_VER=28.0
+taxonomy_VER=2010-09-22
+PDBProteinSequences_VER=2010-09-17
+
+AllOrganismNames=NA
+
+
+# Define some vars for use in Workflows and Resources
+
+# Aspergillus
+aspergillus_fumigatus_af293_OrganismFullName=Aspergillus fumigatus (AF293)
+aspergillus_fumigatus_af293_VER=
+aspergillus_nidulans_a4_OrganismFullName=Aspergillus nidulans (A4)
+aspergillus_nidulans_a4_VER=2010-10-09
+
+# Candida albicans
+candida_albicans_sc5314_OrganismFullName=Candida albicans (SC5314)
+candida_albicans_sc5314_VER=A21
+
+# Cryptococcus
+cryptococcus_neoformans_grubii_h99_OrganismFullName=Cryptococcus neoformans var. grubii (H99)
+cryptococcus_neoformans_grubii_h99_VER=2
+
+# Neurospora
+neurospora_crassa_or74a_OrganismFullName=Neurospora crassa (OR74A)
+neurospora_crassa_or74a_VER=10
+
+# Phanerochaete chrysosporium (JGI)
+phanerochaete_chrysosporium_unknownstrain_OrganismFullName=Phanerochaete chrysosporium
+phanerochaete_chrysosporium_unknownstrain_VER=2.0
+
+# Saccharomyces (SGD)
+saccharomyces_cerevisiae_s288c_OrganismFullName=Saccharomyces cerevisiae (S288C)
+saccharomyces_cerevisiae_s288c_VER=2010-10-09
+
+
+
+
+

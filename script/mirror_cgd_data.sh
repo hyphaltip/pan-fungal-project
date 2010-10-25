@@ -108,7 +108,3 @@ curl -O http://candidagenome.org/download/External_id_mappings/CGDID_2_GeneID.ta
 curl -O http://candidagenome.org/download/External_id_mappings/CGDID_2_RefSeqID.tab.gz
 curl -O http://candidagenome.org/download/External_id_mappings/gp2protein.cgd.gz
 curl -O http://candidagenome.org/download/External_id_mappings/README
-
-
-
-
