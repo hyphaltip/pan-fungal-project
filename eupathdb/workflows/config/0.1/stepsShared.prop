@@ -52,6 +52,7 @@ aspergillus_fumigatus_af293_NCBI_TAXONOMY_ID=330879
 aspergillus_fumigatus_af293_NCBI_PARENT_TAXONOMY_ID=5085
 aspergillus_fumigatus_af293_DBEST_VER=2010-06-17
 aspergillus_fumigatus_af293_TAXON_HIERARCHY_FOR_BLASTX=Eukaryota Fungi Ascomycota
+aspergillus_fumigatus_af293_GO_ASSOCIATIONS_VER=unknown
 
 # Aspergillus nidulans - READY
 aspergillus_nidulans_a4_VER=1
@@ -64,7 +65,7 @@ aspergillus_nidulans_a4_NCBI_TAXONOMY_ID=227321
 aspergillus_nidulans_a4_NCBI_PARENT_TAXONOMY_ID=162425
 aspergillus_nidulans_a4_DBEST_VER=2010-06-17
 aspergillus_nidulans_a4_TAXON_HIERARCHY_FOR_BLASTX=Eukaryota Fungi Ascomycota
-
+aspergillus_nidulans_a4_GO_ASSOCIATIONS_VER=1
 
 # Candida albicans
 candida_albicans_sc5314_VER=A21
@@ -77,6 +78,7 @@ candida_albicans_sc5314_NCBI_TAXONOMY_ID=237561
 candida_albicans_sc5314_NCBI_PARENT_TAXONOMY_ID=5476
 candida_albicans_sc5314_DBEST_VER=2010-06-17
 candida_albicans_sc5314_TAXON_HIERARCHY_FOR_BLASTX=Eukaryota Fungi Ascomycota
+candida_albicans_sc5314_GO_ASSOCIATIONS_VER=A21
 
 # Coccidiodes immitis (RS) - READY
 coccidiodes_immitis_rs_VER=3
@@ -89,6 +91,7 @@ coccidiodes_immitis_rs_NCBI_TAXONOMY_ID=246410
 coccidiodes_immitis_rs_NCBI_PARENT_TAXONOMY_ID=5501
 coccidiodes_immitis_rs_DBEST_VER=2010-06-17
 coccidiodes_immitis_rs_TAXON_HIERARCHY_FOR_BLASTX=Eukaryota Fungi Ascomycota
+coccidiodes_immitis_rs_GO_ASSOCIATIONS_VER=3
 
 # Cryptococcus neoformans - READY
 cryptococcus_neoformans_grubii_h99_VER=2
@@ -101,6 +104,7 @@ cryptococcus_neoformans_grubii_h99_NCBI_TAXONOMY_ID=235443
 cryptococcus_neoformans_grubii_h99_NCBI_PARENT_TAXONOMY_ID=178876
 cryptococcus_neoformans_grubii_h99_DBEST_VER=2010-06-17
 cryptococcus_neoformans_grubii_h99_TAXON_HIERARCHY_FOR_BLASTX=Eukaryota Fungi Basidiomycota
+cryptococcus_neoformans_grubii_h99_GO_ASSOCIATIONS_VER=2
 
 # Neurospora crassa - READY
 neurospora_crassa_or74a_VER=10
@@ -113,6 +117,7 @@ neurospora_crassa_or74a_NCBI_TAXONOMY_ID=367110
 neurospora_crassa_or74a_NCBI_PARENT_TAXONOMY_ID=5141
 neurospora_crassa_or74a_DBEST_VER=2010-06-17
 neurospora_crassa_or74a_TAXON_HIERARCHY_FOR_BLASTX=Eukaryota Fungi Ascomycota
+neurospora_crassa_or74a_GO_ASSOCIATIONS_VER=10
 
 # Phanerochaete chrysosporium (JGI)
 phanerochaete_chrysosporium_rp-78_VER=2.0
@@ -125,6 +130,7 @@ phanerochaete_chrysosporium_rp-78_ORGANISM_ABBERVIATION=PchrRP78
 #phanerochaete_chrysosporium_rp-78_NCBI_PARENT_TAXONOMY_ID=
 phanerochaete_chrysosporium_rp-78_DBEST_VER=2010-06-17
 phanerochaete_chyrsosporium_rp-78_TAXON_HIERARCHY_FOR_BLASTX=Eukaryota Fungi Basidiomycota
+phanerochaete_chrysosporium_rp-78_GO_ASSOCIATIONS_VER=2.0
 
 # Saccharomyces cerevisiae (SGD)
 saccharomyces_cerevisiae_s288c_VER=2010-10-09
@@ -137,3 +143,4 @@ saccharomyces_cerevisiae_s288c_NCBI_TAXONOMY_ID=559292
 saccharomyces_cerevisiae_s288c_NCBI_PARENT_TAXONOMY_ID=4932
 saccharomyces_cerevisiae_s288c_DBEST_VER=2010-06-17
 saccharomyces_cerevisiae_s288c_TAXON_HIERARCHY_FOR_BLASTX=Eukaryota Fungi Ascomycota
+saccharomyces_cerevisiae_s288c_GO_ASSOCATIONS_VER=2010-10-09

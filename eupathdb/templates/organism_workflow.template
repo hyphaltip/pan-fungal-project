@@ -1,0 +1,237 @@
+<!-- ////////////////////////////////////////////////
+
+    [% long_name %]: organism specific workflow
+
+     ////////////////////////////////////////////////  -->
+
+<workflowGraph name="[% symbolic_name %]_workflow">
+  <param name="projectName"/>
+  <param name="projectVersion"/>
+  <param name="parentDataDir"/>
+  <param name="organismResourceXmlFile"/>
+  <param name="downloadSiteDataDir"/>
+  <param name="webServicesDataDir"/>
+
+  <constant name="dataDir">$$parentDataDir$$/[% symbolic_name %]_workflow</constant>
+  <constant name="downloadSiteDataDir">$$downloadSiteDataDir$$/[% symbolic_name %]</constant>
+  <constant name="genomicSeqsFile">$$parentDataDir$$/[% symbolic_name %]_LoadGenome/genomicSeqs.fsa</constant>
+  <constant name="genomicSeqsFileForSsa">$$parentDataDir$$/[% symbolic_name %]_LoadGenome/genomicSeqsForSsa.fsa</constant>
+  <constant name="transcriptSeqsFileForSsa">$$parentDataDir$$/[% symbolic_name %]_LoadGenome/transcriptSeqsForSsa.fsa</constant>
+  <constant name="ssaGeneModelFile">$$parentDataDir$$/[% symbolic_name %]_LoadGenome/geneModelForSsa.txt</constant>
+
+  <step name="makeDataDir" stepClass="ApiCommonWorkflow::Main::WorkflowSteps::MakeDataDir">
+    <paramValue name="dataDir">$$dataDir$$</paramValue>
+  </step>
+
+    <step name="mirrorToCluster" stepClass="ApiCommonWorkflow::Main::WorkflowSteps::MirrorToComputeCluster">
+      <paramValue name="fileOrDirToMirror">$$dataDir$$</paramValue>
+      <depends name="makeDataDir"/>
+    </step>
+
+<!-- Isloates: skip
+    <subgraph name="mapIsolatesToGenome" xmlFile="fungidb/plasmoMapIsolatesToGenome.xml">
+      <paramValue name="parentDataDir">$$dataDir$$</paramValue>
+      <paramValue name="organismName">[% symbolic_name %]</paramValue>
+      <paramValue name="genomicSeqsFile">$$genomicSeqsFile$$</paramValue>
+      <paramValue name="genomeExtDbRlsSpec">[% symbolic_name %]_genome_sequence_RSRC|@@[% symbolic_name %]_GENOME_SEQUENCE_VER@@</paramValue>
+      <depends name="mirrorToCluster"/>
+      <dependsGlobal name="isolatesResource"/>
+    </subgraph>
+
+<!-- SNPs: skip
+    <subgraph name="snps" xmlFile="fungidb/[% symbolic_name %]_SNPs.xml">
+      <paramValue name="parentDataDir">$$dataDir$$</paramValue>
+      <paramValue name="organismResourceXmlFile">$$organismResourceXmlFile$$</paramValue>
+      <paramValue name="genomicSeqsFile">$$genomicSeqsFile$$</paramValue>
+      <depends name="makeDataDir"/>
+    </subgraph>
+-->
+
+    <subgraph name="[% symbolic_name %]_genedb_ids_RSRC" xmlFile="loadResource.xml">
+      <paramValue name="resourceName">[% symbolic_name %]__genedb_ids_RSRC</paramValue>
+      <paramValue name="resourceXmlFileName">$$organismResourceXmlFile$$</paramValue>
+      <paramValue name="parentDataDir">$$dataDir$$</paramValue>
+      <depends name="makeDataDir"/>
+    </subgraph>
+
+<!-- Correct gene aliases: skip
+    <subgraph name="[% symbolic_name %]_correct_gene_aliases_RSRC" xmlFile="loadResource.xml">
+      <paramValue name="resourceName">[% symbolic_name %]_correct_gene_aliases_RSRC</paramValue>
+      <paramValue name="resourceXmlFileName">$$organismResourceXmlFile$$</paramValue>
+      <paramValue name="parentDataDir">$$dataDir$$</paramValue>
+      <depends name="[% symbolic_name %]_genedb_ids_RSRC"/>
+    </subgraph>
+-->
+
+<!-- Microarray: skip
+    <subgraph name="arrayResources" xmlFile="fungidb/[% symbolic_name %]_array_studies.xml">
+      <paramValue name="parentDataDir">$$dataDir$$</paramValue>
+      <paramValue name="organismResourceXmlFile">$$organismResourceXmlFile$$</paramValue>
+      <paramValue name="ssaGeneModelFile">$$ssaGeneModelFile$$</paramValue>
+      <paramValue name="genomicSeqsFileForSsa">$$genomicSeqsFileForSsa$$</paramValue>
+      <paramValue name="transcriptSeqsFileForSsa">$$transcriptSeqsFileForSsa$$</paramValue>
+      <paramValue name="downloadSiteTranscriptExpressionDataDir">$$downloadSiteDataDir$$/transcriptExpression</paramValue>
+      <depends name="[% symbolic_name %]_correct_gene_aliases_RSRC"/>
+    </subgraph>
+-->
+
+<!-- RNASeq/ChipSeq: skip for now
+  <subgraph name="[% symbolic_name %]_rna_seq_and_chip_seq" xmlFile="fungidb/[% symbolic_name %]_rna_seq_and_chip_seq.xml">
+    <paramValue name="parentDataDir">$$dataDir$$</paramValue>
+    <paramValue name="organismResourceXmlFile">$$organismResourceXmlFile$$</paramValue>
+    <paramValue name="ssaGeneModelFile">$$ssaGeneModelFile$$</paramValue>
+    <paramValue name="genomicSeqsFile">$$genomicSeqsFile$$</paramValue>
+    <paramValue name="genomicSeqsFileForSsa">$$genomicSeqsFileForSsa$$</paramValue>
+    <paramValue name="transcriptSeqsFileForSsa">$$transcriptSeqsFileForSsa$$</paramValue>
+    <paramValue name="downloadSiteTranscriptExpressionDataDir">$$downloadSiteDataDir$$/transcriptExpression</paramValue>
+    <depends name="makeDataDir"/>
+  </subgraph>
+-->
+
+
+<!-- Sage tags: skip
+  <subgraph name="WirthSageTagArrayDesign_RSRC" xmlFile="loadResource.xml">
+     <paramValue name="resourceName">WirthSageTagArrayDesign_RSRC</paramValue>
+     <paramValue name="resourceXmlFileName">$$organismResourceXmlFile$$</paramValue>
+     <paramValue name="parentDataDir">$$dataDir$$</paramValue>
+     <depends name="makeDataDir"/>
+  </subgraph>
+
+  <subgraph name="[% symbolic_name %]_map_sage_tags" xmlFile="mapSageTags.xml">
+    <paramValue name="parentDataDir">$$dataDir$$</paramValue>
+    <paramValue name="genomicSeqsFile">$$genomicSeqsFile$$</paramValue>
+    <paramValue name="sageTagExtDbRlsSpec">WirthSageTagArrayDesign_RSRC|@@WirthSageTagArrayDesign_VER@@</paramValue>
+    <paramValue name="studyName">Transcriptional profile of P.falciparum by Serial analysis of gene expression</paramValue>
+    <paramValue name="paramValue">25372</paramValue>  
+    <paramValue name="nickName">mapSageTags</paramValue>   
+    <paramValue name="calFreq">true</paramValue>
+    <depends name="WirthSageTagArrayDesign_RSRC"/>
+  </subgraph>
+
+    <subgraph name="WirthSageTagFreqs_RSRC" xmlFile="loadResource.xml">
+      <paramValue name="resourceName">WirthSageTagFreqs_RSRC</paramValue>
+      <paramValue name="resourceXmlFileName">$$organismResourceXmlFile$$</paramValue>
+      <paramValue name="parentDataDir">$$dataDir$$</paramValue>
+      <depends name="WirthSageTagArrayDesign_RSRC"/>
+    </subgraph>
+-->
+
+  <step name="makeGeneAliasesMappingFile" stepClass="ApiCommonWorkflow::Main::WorkflowSteps::MakeGeneAliasesMappingFile">
+     <paramValue name="genomeExtDbRlsSpec">[% symbolic_name %]_genome_sequence_RSRC|@@[% symbolic_name %]_GENOME_SEQUENCE_VER@@</paramValue>
+     <paramValue name="outputFile">$$downloadSiteDataDir$$/tabular/[% symbolic_name %]_GeneAlias_$$projectName$$-$$projectVersion$$.txt</paramValue>
+    <depends name="[% symbolic_name %]_correct_gene_aliases_RSRC"/>
+  </step>
+
+  <subgraph name="dbxRefsResources" xmlFile="fungidb/[% symbolic_name %]_dbxrefs_workflow.xml">
+    <paramValue name="organismResourceXmlFile">$$organismResourceXmlFile$$</paramValue>
+    <paramValue name="parentDataDir">$$dataDir$$</paramValue>
+    <paramValue name="euPathUniProtLinkDownloadFile">$$downloadSiteDataDir$$/[% symbolic_name %]_EuPathUniProtLinks_$$projectName$$-$$projectVersion$$.txt</paramValue>
+    <paramValue name="projectName">$$projectName$$</paramValue>
+    <depends name="[% symbolic_name %]_correct_gene_aliases_RSRC"/>
+  </subgraph>
+
+  <subgraph name="[% symbolic_name %]_misc_resources" xmlFile="fungidb/[% symbolic_name %]_misc_workflow.xml">
+    <paramValue name="organismResourceXmlFile">$$organismResourceXmlFile$$</paramValue>
+    <paramValue name="parentDataDir">$$dataDir$$</paramValue>
+    <depends name="makeDataDir"/>
+  </subgraph>
+
+  <!-- Gene Ontology -->
+  <subgraph name="[% symbolic_name %]_go_associations_RSRC" xmlFile="loadResource.xml">
+    <paramValue name="resourceName">[% symbolic_name %]_go_associations_RSRC</paramValue>
+    <paramValue name="resourceXmlFileName">$$organismResourceXmlFile$$</paramValue>
+    <paramValue name="parentDataDir">$$dataDir$$</paramValue>
+    <depends name="makeDataDir"/>
+    <dependsGlobal name="GO_RSRC"/>
+    <dependsGlobal name="GO_evidence_codes_RSRC"/>
+  </subgraph>
+
+  <!-- Uniprot -->
+  <subgraph name="[% symbolic_name %]_uniprot_dbxrefs_RSRC" xmlFile="loadResource.xml">
+     <paramValue name="resourceName">[% symbolic_name %]_uniprot_dbxrefs_RSRC</paramValue>
+     <paramValue name="resourceXmlFileName">$$organismResourceXmlFile$$</paramValue>
+     <paramValue name="parentDataDir">$$dataDir$$</paramValue>
+     <depends name="makeDataDir"/>
+  </subgraph>
+
+  <!-- EC IDs -->
+  <subgraph name="[% symbolic_name %]_ec_ids_RSRC" xmlFile="loadResource.xml">
+    <paramValue name="resourceName">[% symbolic_name %]_ec_ids_RSRC</paramValue>
+    <paramValue name="resourceXmlFileName">$$organismResourceXmlFile$$</paramValue>
+    <paramValue name="parentDataDir">$$dataDir$$</paramValue>
+    <depends name="makeDataDir"/>
+    <dependsGlobal name="enzymeDB_RSRC"/>
+  </subgraph>
+
+    <!-- Aliases -->
+    <subgraph name="$$organismName$$_gene_aliases_RSRC" xmlFile="loadResource.xml">
+      <paramValue name="resourceName">$$organismName$$_gene_aliases_RSRC</paramValue>
+      <paramValue name="resourceXmlFileName">$$organismResourceXmlFile$$</paramValue>
+      <paramValue name="parentDataDir">$$dataDir$$</paramValue>
+      <depends name="makeDataDir"/>
+    </subgraph>
+
+    <!-- XREFs -->
+    <subgraph name="[% symbolic_name %]_refseq_dbxrefs_RSRC" xmlFile="loadResource.xml">
+      <paramValue name="resourceName">[% symbolic_name %]_refseq_dbxrefs_RSRC</paramValue>
+      <paramValue name="resourceXmlFileName">$$organismResourceXmlFile$$</paramValue>
+      <paramValue name="parentDataDir">$$dataDir$$</paramValue>
+      <depends name="makeDataDir"/>
+    </subgraph>
+
+
+<!-- Anticodons: skip
+  <subgraph name="[% symbolic_name %]_anticodons_RSRC" xmlFile="loadResource.xml">
+    <paramValue name="resourceName">[% symbolic_name %]_anticodons_RSRC</paramValue>
+    <paramValue name="resourceXmlFileName">$$organismResourceXmlFile$$</paramValue>
+    <paramValue name="parentDataDir">$$dataDir$$</paramValue>
+    <depends name="makeDataDir"/>
+  </subgraph>
+-->
+
+<!-- BAC clones: skip
+    <subgraph name="[% symbolic_name %]_PiggyBac_Clones_Adams_RSRC" xmlFile="loadResource.xml">
+      <paramValue name="resourceName">[% symbolic_name %]_PiggyBac_Clones_Adams_RSRC</paramValue>
+      <paramValue name="resourceXmlFileName">$$organismResourceXmlFile$$</paramValue>
+      <paramValue name="parentDataDir">$$dataDir$$</paramValue>
+      <depends name="makeDataDir"/>
+    </subgraph>
+
+    <step name="mirror_[% symbolic_name %]_PiggyBac_Clones_Adams_RSRCToCluster" stepClass="ApiCommonWorkflow::Main::WorkflowSteps::MirrorToComputeCluster">
+      <paramValue name="fileOrDirToMirror">$$dataDir$$/[% symbolic_name %]_PiggyBac_Clones_Adams_RSRC</paramValue>
+      <depends name="[% symbolic_name %]_PiggyBac_Clones_Adams_RSRC"/>
+    </step>
+
+    <subgraph name="[% symbolic_name %]_map_piggy_bac_clones_to_genomic_seqs" xmlFile="runBlastAndLoadFeatures.xml">
+      <paramValue name="dataDir">$$dataDir$$/[% symbolic_name %]_piggy_bac_clones_adams_RSRC/[% symbolic_name %]_map_piggy_bac_clones_to_genomic_seqs</paramValue>
+      <paramValue name="queryFile">$$dataDir$$/[% symbolic_name %]_PiggyBac_Clones_Adams_RSRC/PiggyBac_Clones_adams.fsa</paramValue>
+      <paramValue name="subjectFile">$$genomicSeqsFile$$</paramValue>
+      <paramValue name="blastArgs">-nogaps V=1 E=1e-10 B=1 hspsepQmax=50000 hspsepSmax=50000 -span1 -topcomboN=1</paramValue>
+      <paramValue name="idRegex">(\\S+)</paramValue>
+      <paramValue name="blastType">blastn</paramValue>
+      <paramValue name="vendor">wu</paramValue>
+      <paramValue name="genomeExtDbRlsSpec">[% symbolic_name %]_genome_sequence_RSRC|@@[% symbolic_name %]_GENOME_SEQUENCE_VER@@</paramValue>
+      <paramValue name="extDbRlsSpec">[% symbolic_name %]_PiggyBac_Clones_Adams_RSRC|@@Pf_PiggyBac_Clones_Adams_VER@@</paramValue>
+      <paramValue name="organismFullName">@@[$ symbolic_name %]_ORGANISM_FULL_NAME@@</paramValue>
+      <depends name="mirror_[% symbolic_name %]_piggy_bac_clones_adams_RSRCToCluster"/>
+    </subgraph>
+-->
+
+  <subgraph name="[% symbolic_name %]_make_and_format_download_files" xmlFile="fungidb/fungidb_make_and_format_download_files_workflow.xml">
+    <paramValue name="downloadSiteDataDir">$$downloadSiteDataDir$$</paramValue>
+    <paramValue name="projectName">$$projectName$$</paramValue>
+    <paramValue name="projectVersion">$$projectVersion$$</paramValue>
+    <paramValue name="webServicesDataDir">$$webServicesDataDir$$</paramValue>
+<!--
+    <paramValue name="genbankIsolateExtDbRlsSpec">PlasmodiumGenbankIsolates_RSRC|@@PlasmodiumGenbankIsolates_VER@@</paramValue>
+    <paramValue name="barcodeIsolateExtDbRlsSpec">Broad_Isolate_Barcode_RSRC|@@Broad_Isolate_Barcode_VER@@</paramValue>
+-->
+    <depends name="snps"/>
+  </subgraph>
+
+</workflowGraph>
+
+
+
+
+

@@ -1,0 +1,216 @@
+<!-- 
+
+INSERT INTO the root graph fungidbWorkflow.xml -->
+
+-->
+
+  <!-- ////////////////////////////////////////////////
+
+         [% long_name %]
+
+       ////////////////////////////////////////////////  -->
+
+  <subgraph name="[% symbolic_name %]_LoadGenome" xmlFile="loadGenome.xml">
+    <paramValue name="projectName">$$projectName$$</paramValue>
+    <paramValue name="organismResourceXmlFile">fungidb/[% symbolic_name %].xml</paramValue>
+    <paramValue name="organismName">[% symbolic_name %]</paramValue>
+    <paramValue name="parentDataDir"></paramValue>
+    <paramValue name="genomeExtDbRlsSpec">[% symbolic_name %]_genome_sequence_RSRC|@@[% symbolic_name %]_GENOME_SEQUENCE_VER@@</paramValue>
+    <paramValue name="organismSpecificISFReference">fungidb/[% symbolic_name %]_workflow_ISF.xml</paramValue>
+    <paramValue name="ncbiTaxonId">@@[% symbolic_name %]_NCBI_TAXONOMY_ID@@</paramValue>
+    <paramValue name="downloadSiteDataDir">downloadSite/$$projectName$$/release-$$projectVersion$$</paramValue>
+    <paramValue name="extractProteins">true</paramValue>
+    <depends name="common"/>
+    <dependsGlobal name="taxonomy_RSRC"/> 
+    <dependsGlobal name="SO_RSRC"/>
+  </subgraph>
+
+  <subgraph name="[% symbolic_name %]_MakeAndMaskTopLevelGenome" xmlFile="makeAndMaskTopLevelGenome.xml">
+    <paramValue name="parentDataDir"></paramValue>
+    <paramValue name="organismName">[% symbolic_name %]</paramValue>
+    <paramValue name="organismFullName">@@[% symbolic_name %]_ORGANISM_FULL_NAME@@</paramValue>
+    <paramValue name="organismResourceXmlFile">fungidb/[% symbolic_name %].xml</paramValue>
+    <paramValue name="genomeExtDbRlsSpec">[% symbolic_name %]_genome_sequence_RSRC|@@[% symbolic_name %]_GENOME_SEQUENCE_VER@@</paramValue>
+    <paramValue name="genomeVirtualSeqsExtDbRlsSpec"></paramValue>
+    <paramValue name="insertVirtualSeqFromAgpFileResourceName"></paramValue>
+    <paramValue name="insertVirtualSeqFromAgpFile">false</paramValue>
+    <paramValue name="repeatMaskSpecies">-species Fungi</paramValue>
+    <paramValue name="comparativeGenomicsFastaDir">$$comparativeGenomicsFastaDir$$</paramValue>
+    <paramValue name="comparativeGenomicsGffDir">$$comparativeGenomicsGffDir$$</paramValue>
+    <depends name="[% symbolic_name %]_LoadGenome"/>
+  </subgraph>
+
+  <subgraph name="[% symbolic_name %]_PostLoadGenome" xmlFile="postLoadGenome.xml">
+    <paramValue name="projectName">$$projectName$$</paramValue>
+    <paramValue name="projectVersion">$$projectVersion$$</paramValue>
+    <paramValue name="parentDataDir"></paramValue>
+    <paramValue name="organismName">[% symbolic_name %]</paramValue>
+    <paramValue name="organismResourceXmlFile">fungidb/[% symbolic_name %].xml</paramValue>
+    <paramValue name="organismFullName">@@[% symbolic_name %]_ORGANISM_FULL_NAME@@</paramValue>
+    <paramValue name="organismTwoLetterAbbrev">@@[% symbolic_name %]_ORGANISM_ABBREVIATION</paramValue>
+    <paramValue name="ncbiTaxonId">@@[% symbolic_name %]_NCBI_TAXONOMY_ID@@</paramValue>
+    <paramValue name="parentNcbiTaxonId">@@[% symbolic_name %]_NCBI_PARENT_TAXONOMY_ID@@</paramValue>
+    <paramValue name="genomeExtDbRlsSpec">[% symbolic_name %]_genome_sequence_RSRC|@@[% symbolic_name %]_GENOME_SEQUENCE_VER@@</paramValue>
+   
+    <!-- FungiDB: skip ieDB -->
+    <paramValue name="loadEiptope">false</paramValue>
+    <paramValue name="iedbResourceName"></paramValue>
+    <paramValue name="iedbVersion"></paramValue>
+    <paramValue name="iedbDbRefResourceName"></paramValue>
+
+    <!-- dbEST -->
+    <paramValue name="dbESTResourceName">[% symbolic_name %]_dbest_RSRC</paramValue>
+    <paramValue name="dbESTVersion">@@[% symbolic_name %]_DBEST_VER@@</paramValue>
+
+    <paramValue name="usePredictedTranscripts">false</paramValue>
+    <paramValue name="predictedTranscriptsExtDbRlsSpec"></paramValue>
+    <paramValue name="runtRNAScan">true</paramValue>
+    <paramValue name="runExportPred">false</paramValue>
+    <paramValue name="maxIntronSize">20000</paramValue>
+    <paramValue name="taxonHierarchyForBlastxFilter">@@[% symbolic_name %]_TAXON_HIERARCHY_FOR_BLASTX@@</paramValue>
+    <paramValue name="nrdbExtDbRlsSpec">NRDB_RSRC|@@NRDB_VER@@</paramValue>
+    <paramValue name="repeatMaskSpecies">-species Fungi</paramValue>
+    <paramValue name="genomeSize">@@[% symbolic_name %]_GENOME_SIZE@@</paramValue>
+    <paramValue name="skipProteomeAnalysis">false</paramValue>
+    <paramValue name="skipGenomeAnalysis">false</paramValue>
+    <paramValue name="mapEpitope">false</paramValue>
+    <paramValue name="makeAssemblySeqs">false</paramValue>
+    <paramValue name="makeAssemblies">false</paramValue>
+    <paramValue name="mapAssemblySeqsAndAssemblies">false</paramValue>
+
+    <!-- Organism-specific EST -->
+    <paramValue name="loadOrganismSpecificESTResource">true</paramValue>
+    <paramValue name="organismSpecificESTResourcesReference">fungidb/[% symbolic_name %]_ESTResource.xml</paramValue>
+    <paramValue name="distanceBetweenStartsForAlignmentsInSameCluster">30000</paramValue>
+
+    <!-- Mass Spec -->
+    <paramValue name="loadOrganismSpecificMassSpecResource">false</paramValue>
+    <paramValue name="organismSpecificMassSpecResourcesReference">fungidb/[% symbolic_name %]_MassSpecResource.xml</paramValue>
+
+    <depends name="[% symbolic_name %]_LoadGenome"/>
+  </subgraph>
+
+  <subgraph name="[% symbolic_name %]_workflow" xmlFile="fungidb/[% symbolic_name %]_workflow.xml">
+    <paramValue name="projectName">$$projectName$$</paramValue>
+    <paramValue name="projectVersion">$$projectVersion$$</paramValue>
+    <paramValue name="parentDataDir"></paramValue>
+    <paramValue name="organismResourceXmlFile">fungidb/[% symbolic_name %].xml</paramValue>
+    <paramValue name="downloadSiteDataDir">downloadSite/$$projectName$$/release-$$projectVersion$$</paramValue>
+    <paramValue name="webServicesDataDir">$$webServicesDataDir$$</paramValue>
+    <depends name="[% symbolic_name %]_LoadGenome"/>
+  </subgraph>
+
+  <subgraph name="[% symbolic_name %]_MakeAndFormatDownloadFiles" xmlFile="makeAndFormatDownloadFiles.xml">
+    <paramValue name="downloadSiteDataDir">downloadSite/$$projectName$$/release-$$projectVersion$$</paramValue>
+    <paramValue name="organismName">[% symbolic_name %]</paramValue>
+    <paramValue name="organismFullName">@@[% symbolic_name %]_ORGANISM_FULL_NAME@@</paramValue>
+    <paramValue name="ncbiTaxonId">@@[% symbolic_name %]_NCBI_TAXONOMY_ID@@</paramValue>
+    <paramValue name="parentNcbiTaxonId">@@[% symbolic_name %]_NCBI_PARENT_TAXONOMY_ID@@</paramValue>
+    <paramValue name="genomeSource">@@[% symbolic_name %]_GENOME_SOURCE@@</paramValue>
+    <paramValue name="projectName">$$projectName$$</paramValue>
+    <paramValue name="projectVersion">$$projectVersion$$</paramValue>
+    <paramValue name="dbESTExtDbRlsSpec">[% symbolic_name %]_dbest_RSRC|@@[% symbolic_name %]_DBEST_VER@@</paramValue>
+    <paramValue name="webServicesDataDir">$$webServicesDataDir$$</paramValue>
+    <paramValue name="genomeExtDbRlsSpec">[% symbolic_name %]_genome_sequence_RSRC|@@[% symbolic_name %]_GENOME_SEQUENCE_VER@@</paramValue>
+    <paramValue name="genomeVirtualSeqsExtDbRlsSpec"></paramValue>
+    <paramValue name="minOrfLength">50</paramValue>
+    <paramValue name="deprecated">false</paramValue>
+    <paramValue name="soTermIdsOrNames">chromosome</paramValue>
+    <paramValue name="makeESTDownloadFile">true</paramValue>
+    <paramValue name="makeProteomeDownloadFile">true</paramValue>
+    <paramValue name="makeGenomicDownloadFile">true</paramValue>
+    <depends name="[% symbolic_name %]_PostLoadGenome"/>
+    <depends name="[% symbolic_name %]_MakeAndMaskTopLevelGenome"/>
+  </subgraph>
+
+    <step name="[% symbolic_name %]_MitoMakeDownloadSiteFastaDataDir" stepClass="ApiCommonWorkflow::Main::WorkflowSteps::MakeApiSiteFilesDir">
+      <paramValue name="apiSiteFilesDir">downloadSite/$$projectName$$/release-$$projectVersion$$/[% symbolic_name %]_Mito/fasta</paramValue>
+    </step>
+
+    <step name="[% symbolic_name %]_MitoMakeDownloadSiteTabularDataDir" stepClass="ApiCommonWorkflow::Main::WorkflowSteps::MakeApiSiteFilesDir">
+      <paramValue name="apiSiteFilesDir">downloadSite/$$projectName$$/release-$$projectVersion$$/[% symbolic_name %]_Mito/tabular</paramValue>
+    </step>
+
+    <step name="[% symbolic_name %]_MitoMakeDownloadSiteGffDataDir" stepClass="ApiCommonWorkflow::Main::WorkflowSteps::MakeApiSiteFilesDir">
+      <paramValue name="apiSiteFilesDir">downloadSite/$$projectName$$/release-$$projectVersion$$/[% symbolic_name %]_Mito/gff</paramValue>
+    </step>
+
+    <step name="[% symbolic_name %]_MitoMakeDownloadSiteTranscriptExpressionDataDir" stepClass="ApiCommonWorkflow::Main::WorkflowSteps::MakeApiSiteFilesDir">
+      <paramValue name="apiSiteFilesDir">downloadSite/$$projectName$$/release-$$projectVersion$$/[% symbolic_name %]_Mito/transcriptExpression</paramValue>
+    </step>
+
+  <subgraph name="[% symbolic_name %]_MitoMakeAndFormatDownloadFiles" xmlFile="makeAndFormatDownloadFiles.xml">
+    <paramValue name="downloadSiteDataDir">downloadSite/$$projectName$$/release-$$projectVersion$$</paramValue>
+    <paramValue name="organismName">[% symbolic_name %]_Mito</paramValue>
+    <paramValue name="organismFullName">@@[% symbolic_name %]_ORGANISM_FULL_NAME@@</paramValue>
+    <paramValue name="ncbiTaxonId">@@[% symbolic_name %]_NCBI_TAXONOMY_ID@@</paramValue>
+    <paramValue name="parentNcbiTaxonId">@@[% symbolic_name %]_NCBI_PARENT_TAXONOMY_ID@@</paramValue>
+    <paramValue name="genomeSource">@@[% symbolic_name %]_GENOME_SOURCE@@</paramValue>
+    <paramValue name="projectName">$$projectName$$</paramValue>
+    <paramValue name="projectVersion">$$projectVersion$$</paramValue>
+    <paramValue name="dbESTExtDbRlsSpec">[% symbolic_name %]_dbest_RSRC|@@[% symbolic_name %]_DBEST_VER@@</paramValue>
+    <paramValue name="webServicesDataDir">$$webServicesDataDir$$</paramValue>
+    <paramValue name="genomeExtDbRlsSpec">[% symbolic_name %]_genome_sequence_RSRC|@@[% symbolic_name %]_GENOME_SEQUENCE_VER@@</paramValue>
+    <paramValue name="genomeVirtualSeqsExtDbRlsSpec"></paramValue>
+    <paramValue name="minOrfLength">50</paramValue>
+    <paramValue name="deprecated">false</paramValue>
+    <paramValue name="soTermIdsOrNames">mitochondrial_chromosome</paramValue>
+    <paramValue name="makeESTDownloadFile">false</paramValue>
+    <paramValue name="makeProteomeDownloadFile">true</paramValue>
+    <paramValue name="makeGenomicDownloadFile">true</paramValue>
+    <depends name="[% symbolic_name %]_PostLoadGenome"/>
+    <depends name="[% symbolic_name %]_MakeAndMaskTopLevelGenome"/>
+    <depends name="[% symbolic_name %]_MitoMakeDownloadSiteFastaDataDir"/>
+    <depends name="[% symbolic_name %]_MitoMakeDownloadSiteTabularDataDir"/>
+    <depends name="[% symbolic_name %]_MitoMakeDownloadSiteGffDataDir"/>
+    <depends name="[% symbolic_name %]_MitoMakeDownloadSiteTranscriptExpressionDataDir"/>
+  </subgraph>
+
+
+    <!--
+    <step name="[% symbolic_name %]_PlastidMakeDownloadSiteFastaDataDir" stepClass="ApiCommonWorkflow::Main::WorkflowSteps::MakeApiSiteFilesDir">
+      <paramValue name="apiSiteFilesDir">downloadSite/$$projectName$$/release-$$projectVersion$$/[% symbolic_name %]_Plastid/fasta</paramValue>
+    </step>
+
+    <step name="[% symbolic_name %]_PlastidMakeDownloadSiteTabularDataDir" stepClass="ApiCommonWorkflow::Main::WorkflowSteps::MakeApiSiteFilesDir">
+      <paramValue name="apiSiteFilesDir">downloadSite/$$projectName$$/release-$$projectVersion$$/[% symbolic_name %]_Plastid/tabular</paramValue>
+    </step>
+
+    <step name="[% symbolic_name %]_PlastidMakeDownloadSiteGffDataDir" stepClass="ApiCommonWorkflow::Main::WorkflowSteps::MakeApiSiteFilesDir">
+      <paramValue name="apiSiteFilesDir">downloadSite/$$projectName$$/release-$$projectVersion$$/[% symbolic_name %]_Plastid/gff</paramValue>
+    </step>
+
+    <step name="[% symbolic_name %]_PlastidMakeDownloadSiteTranscriptExpressionDataDir" stepClass="ApiCommonWorkflow::Main::WorkflowSteps::MakeApiSiteFilesDir">
+      <paramValue name="apiSiteFilesDir">downloadSite/$$projectName$$/release-$$projectVersion$$/[% symbolic_name %]_Plastid/transcriptExpression</paramValue>
+    </step>
+    -->
+
+  <!--
+  <subgraph name="[% symbolic_name %]_PlastidMakeAndFormatDownloadFiles" xmlFile="makeAndFormatDownloadFiles.xml">
+    <paramValue name="downloadSiteDataDir">downloadSite/$$projectName$$/release-$$projectVersion$$</paramValue>
+    <paramValue name="organismName">[% symbolic_name %]_Plastid</paramValue>
+    <paramValue name="organismFullName">@@[% symbolic_name %]_ORGANISM_FULL_NAME@@</paramValue>
+    <paramValue name="ncbiTaxonId">@@[% symbolic_name %]_NCBI_TAXONOMY_ID@@</paramValue>
+    <paramValue name="parentNcbiTaxonId">@@[% symbolic_name %]_NCBI_PARENT_TAXONOMY_ID@@</paramValue>
+    <paramValue name="genomeSource">@@[% symbolic_name %]_GENOME_SOURCE@@</paramValue>
+    <paramValue name="projectName">$$projectName$$</paramValue>
+    <paramValue name="projectVersion">$$projectVersion$$</paramValue>
+    <paramValue name="dbESTExtDbRlsSpec">[% symbolic_name %]_dbest_RSRC|@@[% symbolic_name %]_DBEST_VER@@</paramValue>
+    <paramValue name="webServicesDataDir">$$webServicesDataDir$$</paramValue>
+    <paramValue name="genomeExtDbRlsSpec">[% symbolic_name %]_genome_sequence_RSRC|@@[% symbolic_name %]_GENOME_SEQUENCE_VER@@</paramValue>
+    <paramValue name="genomeVirtualSeqsExtDbRlsSpec"></paramValue>
+    <paramValue name="minOrfLength">50</paramValue>
+    <paramValue name="deprecated">false</paramValue>
+    <paramValue name="soTermIdsOrNames">plastid_sequence</paramValue>
+    <paramValue name="makeESTDownloadFile">false</paramValue>
+    <paramValue name="makeProteomeDownloadFile">true</paramValue>
+    <paramValue name="makeGenomicDownloadFile">true</paramValue>
+    <depends name="[% symbolic_name %]_PostLoadGenome"/>
+    <depends name="[% symbolic_name %]_MakeAndMaskTopLevelGenome"/>
+    <depends name="[% symbolic_name %]_PlastidMakeDownloadSiteFastaDataDir"/>
+    <depends name="[% symbolic_name %]_PlastidMakeDownloadSiteTabularDataDir"/>
+    <depends name="[% symbolic_name %]_PlastidMakeDownloadSiteGffDataDir"/>
+    <depends name="[% symbolic_name %]_PlastidMakeDownloadSiteTranscriptExpressionDataDir"/>
+  </subgraph>
+  -->
+
