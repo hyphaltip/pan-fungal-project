@@ -1,0 +1,27 @@
+ <!-- //////////////////////
+           ALIASES
+      ////////////////////// -->
+
+  <resource resource="[% symbolic_name %]_primary_gene_aliases_RSRC" 
+            version="@@[% symbolic_name %]_VER@@"
+            plugin="ApiCommonData::Load::Plugin::InsertNaFeatureNaGene">
+ 
+    <manualGet fileOrDir="FungiDB/[% symbolic_name %]/genome/%RESOURCE_VERSION%/primary_gene_aliases.tab"/>
+
+    <pluginArgs>--MappingFile @@dataDir@@/primary_gene_aliases.tab</pluginArgs>
+    <info
+        displayName="Mapping of FungiDB IDs to original gene names."
+        project="FungiDB"
+        organisms="@@[% symbolic_name %]_ORGANISM_FULL_NAME@@"
+        category="ignore"
+        publicUrl=""
+        contact=""
+        email=""
+        institution="">
+      <description>
+        <![CDATA[
+         
+        ]]>
+      </description>
+    </info>
+  </resource>

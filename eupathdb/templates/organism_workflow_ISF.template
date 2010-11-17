@@ -47,6 +47,6 @@
       <depends name="[% symbolic_name %]_genome_annotations_RSRC"/>
       <depends name="[% symbolic_name %]_mito_RSRC"/>
   </subgraph>
-  ->
+  -->
 
 </workflowGraph>

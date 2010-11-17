@@ -28,6 +28,57 @@
       <depends name="makeDataDir"/>
     </step>
 
+  <!-- //////////////////////
+             ALIASES
+       ////////////////////// -->
+
+       <!-- Primary Aliases -->
+       <subgraph name="[% symbolic_name %]_primary_gene_aliases_RSRC" xmlFile="loadResource.xml">
+            <paramValue name="resourceName">[% symbolic_name %]_primary_gene_aliases_RSRC</paramValue>
+            <paramValue name="resourceXmlFileName">$$organismResourceXmlFile$$</paramValue>
+            <paramValue name="parentDataDir">$$dataDir$$</paramValue>
+            <depends name="makeDataDir"/>
+       </subgraph>
+
+       <!-- Other Aliases -->
+       <subgraph name="[% symbolic_name %]_gene_aliases_RSRC" xmlFile="loadResource.xml">
+            <paramValue name="resourceName">[% symbolic_name %]_gene_aliases_RSRC</paramValue>
+            <paramValue name="resourceXmlFileName">$$organismResourceXmlFile$$</paramValue>
+            <paramValue name="parentDataDir">$$dataDir$$</paramValue>
+            <depends name="makeDataDir"/>
+       </subgraph>
+
+  <!-- //////////////////////
+             DBXREFS
+       ////////////////////// -->
+
+       <!-- Uniprot -->
+       <subgraph name="[% symbolic_name %]_uniprot_dbxrefs_RSRC" xmlFile="loadResource.xml">
+            <paramValue name="resourceName">[% symbolic_name %]_uniprot_dbxrefs_RSRC</paramValue>
+            <paramValue name="resourceXmlFileName">$$organismResourceXmlFile$$</paramValue>
+            <paramValue name="parentDataDir">$$dataDir$$</paramValue>
+            <depends name="makeDataDir"/>
+       </subgraph>
+
+       <!-- EC IDs -->
+       <subgraph name="[% symbolic_name %]_ec_ids_RSRC" xmlFile="loadResource.xml">
+            <paramValue name="resourceName">[% symbolic_name %]_ec_ids_RSRC</paramValue>
+            <paramValue name="resourceXmlFileName">$$organismResourceXmlFile$$</paramValue>
+            <paramValue name="parentDataDir">$$dataDir$$</paramValue>
+            <depends name="makeDataDir"/>
+            <dependsGlobal name="enzymeDB_RSRC"/>
+        </subgraph>
+
+        <!-- REFSEQ -->
+        <subgraph name="[% symbolic_name %]_refseq_dbxrefs_RSRC" xmlFile="loadResource.xml">
+            <paramValue name="resourceName">[% symbolic_name %]_refseq_dbxrefs_RSRC</paramValue>
+            <paramValue name="resourceXmlFileName">$$organismResourceXmlFile$$</paramValue>
+            <paramValue name="parentDataDir">$$dataDir$$</paramValue>
+            <depends name="makeDataDir"/>
+        </subgraph>
+
+
+
 <!-- Isloates: skip
     <subgraph name="mapIsolatesToGenome" xmlFile="fungidb/plasmoMapIsolatesToGenome.xml">
       <paramValue name="parentDataDir">$$dataDir$$</paramValue>
@@ -37,6 +88,7 @@
       <depends name="mirrorToCluster"/>
       <dependsGlobal name="isolatesResource"/>
     </subgraph>
+-->
 
 <!-- SNPs: skip
     <subgraph name="snps" xmlFile="fungidb/[% symbolic_name %]_SNPs.xml">
@@ -47,12 +99,14 @@
     </subgraph>
 -->
 
+<!--
     <subgraph name="[% symbolic_name %]_genedb_ids_RSRC" xmlFile="loadResource.xml">
-      <paramValue name="resourceName">[% symbolic_name %]__genedb_ids_RSRC</paramValue>
+      <paramValue name="resourceName">[% symbolic_name %]_genedb_ids_RSRC</paramValue>
       <paramValue name="resourceXmlFileName">$$organismResourceXmlFile$$</paramValue>
       <paramValue name="parentDataDir">$$dataDir$$</paramValue>
       <depends name="makeDataDir"/>
     </subgraph>
+-->
 
 <!-- Correct gene aliases: skip
     <subgraph name="[% symbolic_name %]_correct_gene_aliases_RSRC" xmlFile="loadResource.xml">
@@ -116,6 +170,7 @@
     </subgraph>
 -->
 
+<!--
   <step name="makeGeneAliasesMappingFile" stepClass="ApiCommonWorkflow::Main::WorkflowSteps::MakeGeneAliasesMappingFile">
      <paramValue name="genomeExtDbRlsSpec">[% symbolic_name %]_genome_sequence_RSRC|@@[% symbolic_name %]_GENOME_SEQUENCE_VER@@</paramValue>
      <paramValue name="outputFile">$$downloadSiteDataDir$$/tabular/[% symbolic_name %]_GeneAlias_$$projectName$$-$$projectVersion$$.txt</paramValue>
@@ -129,12 +184,15 @@
     <paramValue name="projectName">$$projectName$$</paramValue>
     <depends name="[% symbolic_name %]_correct_gene_aliases_RSRC"/>
   </subgraph>
+-->
 
+<!--
   <subgraph name="[% symbolic_name %]_misc_resources" xmlFile="fungidb/[% symbolic_name %]_misc_workflow.xml">
     <paramValue name="organismResourceXmlFile">$$organismResourceXmlFile$$</paramValue>
     <paramValue name="parentDataDir">$$dataDir$$</paramValue>
     <depends name="makeDataDir"/>
   </subgraph>
+-->
 
   <!-- Gene Ontology -->
   <subgraph name="[% symbolic_name %]_go_associations_RSRC" xmlFile="loadResource.xml">
@@ -146,38 +204,9 @@
     <dependsGlobal name="GO_evidence_codes_RSRC"/>
   </subgraph>
 
-  <!-- Uniprot -->
-  <subgraph name="[% symbolic_name %]_uniprot_dbxrefs_RSRC" xmlFile="loadResource.xml">
-     <paramValue name="resourceName">[% symbolic_name %]_uniprot_dbxrefs_RSRC</paramValue>
-     <paramValue name="resourceXmlFileName">$$organismResourceXmlFile$$</paramValue>
-     <paramValue name="parentDataDir">$$dataDir$$</paramValue>
-     <depends name="makeDataDir"/>
-  </subgraph>
 
-  <!-- EC IDs -->
-  <subgraph name="[% symbolic_name %]_ec_ids_RSRC" xmlFile="loadResource.xml">
-    <paramValue name="resourceName">[% symbolic_name %]_ec_ids_RSRC</paramValue>
-    <paramValue name="resourceXmlFileName">$$organismResourceXmlFile$$</paramValue>
-    <paramValue name="parentDataDir">$$dataDir$$</paramValue>
-    <depends name="makeDataDir"/>
-    <dependsGlobal name="enzymeDB_RSRC"/>
-  </subgraph>
 
-    <!-- Aliases -->
-    <subgraph name="$$organismName$$_gene_aliases_RSRC" xmlFile="loadResource.xml">
-      <paramValue name="resourceName">$$organismName$$_gene_aliases_RSRC</paramValue>
-      <paramValue name="resourceXmlFileName">$$organismResourceXmlFile$$</paramValue>
-      <paramValue name="parentDataDir">$$dataDir$$</paramValue>
-      <depends name="makeDataDir"/>
-    </subgraph>
 
-    <!-- XREFs -->
-    <subgraph name="[% symbolic_name %]_refseq_dbxrefs_RSRC" xmlFile="loadResource.xml">
-      <paramValue name="resourceName">[% symbolic_name %]_refseq_dbxrefs_RSRC</paramValue>
-      <paramValue name="resourceXmlFileName">$$organismResourceXmlFile$$</paramValue>
-      <paramValue name="parentDataDir">$$dataDir$$</paramValue>
-      <depends name="makeDataDir"/>
-    </subgraph>
 
 
 <!-- Anticodons: skip
@@ -189,45 +218,17 @@
   </subgraph>
 -->
 
-<!-- BAC clones: skip
-    <subgraph name="[% symbolic_name %]_PiggyBac_Clones_Adams_RSRC" xmlFile="loadResource.xml">
-      <paramValue name="resourceName">[% symbolic_name %]_PiggyBac_Clones_Adams_RSRC</paramValue>
-      <paramValue name="resourceXmlFileName">$$organismResourceXmlFile$$</paramValue>
-      <paramValue name="parentDataDir">$$dataDir$$</paramValue>
-      <depends name="makeDataDir"/>
-    </subgraph>
-
-    <step name="mirror_[% symbolic_name %]_PiggyBac_Clones_Adams_RSRCToCluster" stepClass="ApiCommonWorkflow::Main::WorkflowSteps::MirrorToComputeCluster">
-      <paramValue name="fileOrDirToMirror">$$dataDir$$/[% symbolic_name %]_PiggyBac_Clones_Adams_RSRC</paramValue>
-      <depends name="[% symbolic_name %]_PiggyBac_Clones_Adams_RSRC"/>
-    </step>
-
-    <subgraph name="[% symbolic_name %]_map_piggy_bac_clones_to_genomic_seqs" xmlFile="runBlastAndLoadFeatures.xml">
-      <paramValue name="dataDir">$$dataDir$$/[% symbolic_name %]_piggy_bac_clones_adams_RSRC/[% symbolic_name %]_map_piggy_bac_clones_to_genomic_seqs</paramValue>
-      <paramValue name="queryFile">$$dataDir$$/[% symbolic_name %]_PiggyBac_Clones_Adams_RSRC/PiggyBac_Clones_adams.fsa</paramValue>
-      <paramValue name="subjectFile">$$genomicSeqsFile$$</paramValue>
-      <paramValue name="blastArgs">-nogaps V=1 E=1e-10 B=1 hspsepQmax=50000 hspsepSmax=50000 -span1 -topcomboN=1</paramValue>
-      <paramValue name="idRegex">(\\S+)</paramValue>
-      <paramValue name="blastType">blastn</paramValue>
-      <paramValue name="vendor">wu</paramValue>
-      <paramValue name="genomeExtDbRlsSpec">[% symbolic_name %]_genome_sequence_RSRC|@@[% symbolic_name %]_GENOME_SEQUENCE_VER@@</paramValue>
-      <paramValue name="extDbRlsSpec">[% symbolic_name %]_PiggyBac_Clones_Adams_RSRC|@@Pf_PiggyBac_Clones_Adams_VER@@</paramValue>
-      <paramValue name="organismFullName">@@[$ symbolic_name %]_ORGANISM_FULL_NAME@@</paramValue>
-      <depends name="mirror_[% symbolic_name %]_piggy_bac_clones_adams_RSRCToCluster"/>
-    </subgraph>
--->
-
+<!--
   <subgraph name="[% symbolic_name %]_make_and_format_download_files" xmlFile="fungidb/fungidb_make_and_format_download_files_workflow.xml">
     <paramValue name="downloadSiteDataDir">$$downloadSiteDataDir$$</paramValue>
     <paramValue name="projectName">$$projectName$$</paramValue>
     <paramValue name="projectVersion">$$projectVersion$$</paramValue>
     <paramValue name="webServicesDataDir">$$webServicesDataDir$$</paramValue>
-<!--
     <paramValue name="genbankIsolateExtDbRlsSpec">PlasmodiumGenbankIsolates_RSRC|@@PlasmodiumGenbankIsolates_VER@@</paramValue>
     <paramValue name="barcodeIsolateExtDbRlsSpec">Broad_Isolate_Barcode_RSRC|@@Broad_Isolate_Barcode_VER@@</paramValue>
--->
     <depends name="snps"/>
   </subgraph>
+-->
 
 </workflowGraph>
 

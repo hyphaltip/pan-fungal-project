@@ -47,7 +47,7 @@ INSERT INTO the root graph fungidbWorkflow.xml -->
     <paramValue name="organismName">[% symbolic_name %]</paramValue>
     <paramValue name="organismResourceXmlFile">fungidb/[% symbolic_name %].xml</paramValue>
     <paramValue name="organismFullName">@@[% symbolic_name %]_ORGANISM_FULL_NAME@@</paramValue>
-    <paramValue name="organismTwoLetterAbbrev">@@[% symbolic_name %]_ORGANISM_ABBREVIATION</paramValue>
+    <paramValue name="organismTwoLetterAbbrev">@@[% symbolic_name %]_ORGANISM_ABBREVIATION@@</paramValue>
     <paramValue name="ncbiTaxonId">@@[% symbolic_name %]_NCBI_TAXONOMY_ID@@</paramValue>
     <paramValue name="parentNcbiTaxonId">@@[% symbolic_name %]_NCBI_PARENT_TAXONOMY_ID@@</paramValue>
     <paramValue name="genomeExtDbRlsSpec">[% symbolic_name %]_genome_sequence_RSRC|@@[% symbolic_name %]_GENOME_SEQUENCE_VER@@</paramValue>
@@ -79,9 +79,14 @@ INSERT INTO the root graph fungidbWorkflow.xml -->
     <paramValue name="mapAssemblySeqsAndAssemblies">false</paramValue>
 
     <!-- Organism-specific EST -->
-    <paramValue name="loadOrganismSpecificESTResource">true</paramValue>
-    <paramValue name="organismSpecificESTResourcesReference">fungidb/[% symbolic_name %]_ESTResource.xml</paramValue>
+    <paramValue name="loadOrganismSpecificESTResource">false</paramValue>
+    <paramValue name="organismSpecificESTResourcesReference"></paramValue>
     <paramValue name="distanceBetweenStartsForAlignmentsInSameCluster">30000</paramValue>
+
+    <!-- skip
+    <paramValue name="loadOrganismSpecificESTResource">true</paramValue>
+    <paramValue name="organismSpecificESTResourcesReference">fungidb/[% symbolic_name %]_workflow_EST.xml</paramValue>
+    -->
 
     <!-- Mass Spec -->
     <paramValue name="loadOrganismSpecificMassSpecResource">false</paramValue>

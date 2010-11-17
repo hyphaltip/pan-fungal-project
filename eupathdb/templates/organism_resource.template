@@ -127,8 +127,41 @@
           </info>
      </resource>
 
+ <!-- //////////////////////
+           ALIASES
+      ////////////////////// -->
 
-     <!-- GO associations -->
+  <resource resource="[% symbolic_name %]_primary_gene_aliases_RSRC" 
+            version="@@[% symbolic_name %]_VER@@"
+            plugin="ApiCommonData::Load::Plugin::InsertNaFeatureNaGene">
+ 
+    <manualGet fileOrDir="FungiDB/[% symbolic_name %]/genome/%RESOURCE_VERSION%/primary_gene_aliases.tab"/>
+
+    <pluginArgs>--MappingFile @@dataDir@@/primary_gene_aliases.tab</pluginArgs>
+    <info
+        displayName="Mapping of FungiDB IDs to original gene names."
+        project="FungiDB"
+        organisms="@@[% symbolic_name %]_ORGANISM_FULL_NAME@@"
+        category="ignore"
+        publicUrl=""
+        contact=""
+        email=""
+        institution="">
+      <description>
+        <![CDATA[
+         
+        ]]>
+      </description>
+    </info>
+  </resource>
+
+
+
+<!-- //////////////////////
+           ONTOLOGIES
+     ////////////////////// -->
+
+     <!-- GO -->
      <resource 
          resource="[% symbolic_name %]_go_associations_RSRC"
          version="@@[% symbolic_name %]_GO_ASSOCIATIONS_VER@@"
@@ -149,6 +182,15 @@
          <manualGet 
               fileOrDir="FungiDB/[% symbolic_name %]/gene_ontology/@@[% symbolic_name %]_GO_ASSOCIATIONS_VER@@/gene_association.cgd" /> 
 -->
+
+         <unpack>
+                fungidb_prepend_fungidb_identifier.pl
+                     --input @@dataDir@@/gene_association.sgd
+                     --output @@dataDir@@/gene_association.uniquified.sgd
+                     --prefix @@[% symbolic_name %]_ORGANISM_ABBREVIATION@@
+                     --col 2
+                     --verbose
+         </unpack>
 
          <pluginArgs>
                --externalDatabaseSpec "%RESOURCE_NAME%|%RESOURCE_VERSION%"
@@ -179,6 +221,10 @@
           </info>
    </resource>
 
+
+<!-- //////////////////////
+           DBXREFS
+     ////////////////////// -->
    
    <!-- EC IDs -->
    <resource
@@ -229,52 +275,6 @@
       </info>
    </resource>
 
-   <!-- Aliases -->
-   <resource resource="[% symbolic_name %]_gene_aliases_RSRC"
-            version="@@[% symbolic_name %]_VER@@"
-            plugin="ApiCommonData::Load::Plugin::InsertDBxRefs">
-
-        <wgetArgs url="">
-               --tries=5 
-               --mirror 
-                --no-parent
-               --no-host-directories
-               --cut-dirs=5
-         </wgetArgs>
- 
-         <unpack>
-             fungidb_map_candida_ids_to_features.pl
-                --input @@dataDir@@/C_albicans_SC5314_A21_chromosomal_feature.tab
-                --output @@dataDir@@/gene_aliases.tab
-                --prefix @@[% symbolic_name %]_ORGANISM_ABBREVIATION@@
-         </unpack>
-
-         <pluginArgs>
-             --DbRefMappingFile @@dataDir@@/gene_aliases.tab
-             --extDbName %RESOURCE_NAME% 
-             --extDbReleaseNumber %RESOURCE_VERSION% 
-             --columnSpec "primary_identifier,lowercase_primary_identifier" 
-             --tableName "DbRefNASequence" 
-         </pluginArgs>
-
-         <info
-             displayName="[% long_name %]"
-             project="FungiDB"
-             organisms="@@[% symbolic_name %]_ORGANISM_FULL_NAME@@"
-             category="ignore"
-             publicUrl=""
-             contact=""
-             email=""
-             institution=@@[% symbolic_name %]_GENOME_SOURCE@@">
-            <description>
-               <![CDATA[
-                   [% long_name %] Gene aliases.
-               ]]>
-            </description>
-         </info>
-    </resource>
-
-    
     <!-- GeneIDs to refseq -->
     <resource resource="[% symbolic_name %]_refseq_dbxrefs_RSRC"
               version="@@[% symbolic_name %]_VER@@"
