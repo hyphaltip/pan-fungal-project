@@ -18,7 +18,7 @@ manualDeliveryDir=/files/cbil/data/cbil/EuPathDB/manualDelivery
 
 # Tuning manager-specific settings
 email=weili1@pcbi.upenn.edu
-instance=fung-prod
+instance=fung-rbld
 tuningMangerPassword=po34weep
 
 dbestConnect = dbi:Oracle:dbst100n
@@ -133,9 +133,9 @@ phanerochaete_chrysosporium_rp-78_TAXON_HIERARCHY_FOR_BLASTX=Eukaryota
 phanerochaete_chrysosporium_rp-78_GO_ASSOCIATIONS_VER=2.0
 
 # Saccharomyces cerevisiae (SGD)
-saccharomyces_cerevisiae_s288c_VER=2010-11-16
+saccharomyces_cerevisiae_s288c_VER=2010-10-09
 saccharomyces_cerevisiae_s288c_GENOME_SOURCE=SGD
-saccharomyces_cerevisiae_s288c_GENOME_SEQUENCE_VER=2010-11-16
+saccharomyces_cerevisiae_s288c_GENOME_SEQUENCE_VER=2010-10-09
 saccharomyces_cerevisiae_s288c_GENOME_SIZE=12000000
 saccharomyces_cerevisiae_s288c_ORGANISM_FULL_NAME=Saccharomyces cerevisiae (S288C)
 saccharomyces_cerevisiae_s288c_ORGANISM_ABBREVIATION=ScerS288C
@@ -143,4 +143,4 @@ saccharomyces_cerevisiae_s288c_NCBI_TAXONOMY_ID=559292
 saccharomyces_cerevisiae_s288c_NCBI_PARENT_TAXONOMY_ID=4932
 saccharomyces_cerevisiae_s288c_DBEST_VER=2010-06-17
 saccharomyces_cerevisiae_s288c_TAXON_HIERARCHY_FOR_BLASTX=Eukaryota Fungi Ascomycota
-saccharomyces_cerevisiae_s288c_GO_ASSOCATIONS_VER=2010-11-16
+saccharomyces_cerevisiae_s288c_GO_ASSOCATIONS_VER=2010-10-09

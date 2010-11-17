@@ -1,5 +1,5 @@
 name=FungiDB
-version=0.1
+version=0.1-test
 workflowXmlFile=fungidb/fungiWorkflow.xml
 workflowTable=apidb.workflow
 workflowStepTable=apidb.workflowstep
