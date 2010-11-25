@@ -4,8 +4,9 @@
    
    <!-- EC IDs -->
    <resource
-          resource="[% symbolic_name %]_ec_ids_RSRC" version="@@[% symbolic_name %]_VER@@"
-      plugin="GUS::Community::Plugin::InsertECMapping">
+          resource="[% symbolic_name %]_ec_ids_RSRC" 
+          version="@@[% symbolic_name %]_VER@@"
+          plugin="GUS::Community::Plugin::InsertECMapping">
 
          <!-- CUSTOMIZE -->
         <wgetArgs url="">
@@ -102,7 +103,7 @@
 
 
      <resource resource="[% symbolic_name %]_uniprot_dbxrefs_RSRC"
-               version="@@[% symbolic_name %]_uniprot_dbxrefs_VER@@"
+               version="@@[% symbolic_name %]_VER@@"
                plugin="ApiCommonData::Load::Plugin::InsertDBxRefs">
 
         <wgetArgs url="">

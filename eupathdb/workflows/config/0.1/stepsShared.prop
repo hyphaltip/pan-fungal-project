@@ -69,16 +69,19 @@ aspergillus_nidulans_a4_GO_ASSOCIATIONS_VER=1
 
 # Candida albicans
 candida_albicans_sc5314_VER=A21
-candida_albicans_sc5314_GENOME_SOURCE=CGD
 candida_albicans_sc5314_GENOME_SEQUENCE_VER=A21
+candida_albicans_sc5314_GENOME_SOURCE=CGD
 candida_albicans_sc5314_GENOME_SIZE=14000000
 candida_albicans_sc5314_ORGANISM_FULL_NAME=Candida albicans (SC5314)
 candida_albicans_sc5314_ORGANISM_ABBREVIATION=CalbSC5314
+candida_albicans_sc5314_GO_ASSOCIATIONS_VER=A21
+# Historical and deprecated
+candida_albicans_sc5314_uniprot_dbxrefs_VER=A21
 candida_albicans_sc5314_NCBI_TAXONOMY_ID=237561
 candida_albicans_sc5314_NCBI_PARENT_TAXONOMY_ID=5476
-candida_albicans_sc5314_DBEST_VER=2010-06-17
 candida_albicans_sc5314_TAXON_HIERARCHY_FOR_BLASTX=Eukaryota Fungi Ascomycota
-candida_albicans_sc5314_GO_ASSOCIATIONS_VER=A21
+candida_albicans_sc5314_DBEST_VER=2010-06-17
+
 
 # Coccidiodes immitis (RS) - READY
 coccidiodes_immitis_rs_VER=3
@@ -143,4 +146,4 @@ saccharomyces_cerevisiae_s288c_NCBI_TAXONOMY_ID=559292
 saccharomyces_cerevisiae_s288c_NCBI_PARENT_TAXONOMY_ID=4932
 saccharomyces_cerevisiae_s288c_DBEST_VER=2010-06-17
 saccharomyces_cerevisiae_s288c_TAXON_HIERARCHY_FOR_BLASTX=Eukaryota Fungi Ascomycota
-saccharomyces_cerevisiae_s288c_GO_ASSOCATIONS_VER=2010-11-16
+saccharomyces_cerevisiae_s288c_GO_ASSOCIATIONS_VER=2010-11-16
