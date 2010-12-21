@@ -1,0 +1,8 @@
+./create.sh aspergillus_fumigatus_af293 'Aspergillus fumigatus (AF293)'
+./create.sh saccharomyces_cerevisiae_s288c 'Saccharomyces cerevisiae (S288C)'
+./create.sh phanerochaete_chrysosporium_rp-78 'Phanerochaete chrysosporium (RP-78)'
+./create.sh neurospora_crassa_or74a 'Neurospora crassa (OR74A)'
+./create.sh cryptococcus_neoformans_grubii_h99 'Cryptococcus neoformans var. grubii (H99)'
+./create.sh coccidiodes_immitis_rs 'Coccidiodes immitis (RS)'
+./create.sh candida_albicans_sc5314 'Candida albicans (SC5314)'
+./create.sh aspergillus_nidulans_a4 'Aspergillus nidulans (A4)'

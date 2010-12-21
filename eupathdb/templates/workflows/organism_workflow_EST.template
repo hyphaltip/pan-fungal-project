@@ -1,0 +1,38 @@
+<workflowGraph name="pfalciparumESTResource">
+      <param name="organismResourceXmlFile"/>
+      <param name="parentDataDir"/>
+
+  <constant name="dataDir">$$parentDataDir$$/pfalciparumESTResources</constant>
+
+  <step name="makeDataDir" stepClass="ApiCommonWorkflow::Main::WorkflowSteps::MakeDataDir">
+    <paramValue name="dataDir">$$dataDir$$</paramValue>
+  </step>
+
+  <subgraph name="ZhangGardnerPf3D7_EstLibrary_RSRC" xmlFile="loadResource.xml">
+    <paramValue name="resourceName">ZhangGardnerPf3D7_EstLibrary_RSRC</paramValue>
+    <paramValue name="resourceXmlFileName">$$organismResourceXmlFile$$</paramValue>
+    <paramValue name="parentDataDir">$$dataDir$$</paramValue>
+    <depends name="makeDataDir"/>
+  </subgraph>
+
+  <subgraph name="WatanabePf3D7_PredictedTranscripts_RSRC" xmlFile="loadResource.xml">
+    <paramValue name="resourceName">WatanabePf3D7_PredictedTranscripts_RSRC</paramValue>
+    <paramValue name="resourceXmlFileName">$$organismResourceXmlFile$$</paramValue>
+    <paramValue name="parentDataDir">$$dataDir$$</paramValue>
+    <depends name="makeDataDir"/>
+  </subgraph>
+
+  <subgraph name="WatanabePf3D7_EstLibrary_RSRC" xmlFile="loadResource.xml">
+    <paramValue name="resourceName">WatanabePf3D7_EstLibrary_RSRC</paramValue>
+    <paramValue name="resourceXmlFileName">$$organismResourceXmlFile$$</paramValue>
+    <paramValue name="parentDataDir">$$dataDir$$</paramValue>
+    <depends name="makeDataDir"/>
+  </subgraph>
+
+  <subgraph name="Florent_Pf_ESTLibrary_RSRC" xmlFile="loadResource.xml">
+    <paramValue name="resourceName">Florent_Pf_ESTLibrary_RSRC</paramValue>
+    <paramValue name="resourceXmlFileName">$$organismResourceXmlFile$$</paramValue>
+    <paramValue name="parentDataDir">$$dataDir$$</paramValue>
+    <depends name="makeDataDir"/>
+  </subgraph>
+</workflowGraph>

@@ -89,12 +89,12 @@ sub download_index_page_urls {
 	    # Append the downloads link
 	    $url .= 'MultiDownloads.html';
 	    $links{$url} = $link->text;   # Maybe species
-
+	    
 	    # Try substituting genome for fungi just in case
 	    # Doens't quite work
 #	    $url =~ s/fungi/genome/g;
 #	    $links{$url} = $link->text;   # Maybe species
-
+	    
 	} 
 	
 	# AND try to do it systematically.
@@ -107,22 +107,22 @@ sub download_index_page_urls {
 	    
 	    next unless $_->text && $_->text eq 'Download';
 #	    $self->log->debug($_ . $_->text . ': ' . $_->url) if $self->debug;
-
+	    
 	    my $download_page = $_->url;
 	    
 	    # fix broken relative links
 	    $download_page = ($download_page !~ /^\// && $download_page !~ /^http/) ? "/$download_page" : $download_page; 
-
+	    
 	    # Append the base for relative links	    
 	    $download_page = ($download_page =~ /^h/) ? $download_page 
 		: $self->base_url . $download_page;
 	    
 	    # Replace Downloads.html with MultiDownloads.html
 	    $download_page =~ s/Downloads\.html/MultiDownloads\.html/;
-
+	    
 	    # Get rid of session IDs; the url is 0th element
 	    my @url_pieces = split(';',$download_page);
-
+	    
 	    # uniqiufy by URL - lots of duplicates on the page
 	    $links{$url_pieces[0]} = $_->text;   # Maybe species
 	    $self->log->debug($url_pieces[0]);	
@@ -139,9 +139,9 @@ sub download_index_page_urls {
 sub slurp {
     my $self     = shift;
     my $organism = shift;
-
+    
     my $url = $organism->index_url;
-
+    
     # Lots of variability in species, but not the file roots. Meh.
     # TO-DO. Needs to be standardized.
     my $file_template = $organism->file_template;
@@ -179,12 +179,12 @@ sub slurp {
 
 	    # By default, we mirror into species/raw/extracted_organism name.
 	    # This is maybe cleaner as species/STRAIN/raw...
-	    
 	    my $path = join('/',
 			    $organism->symbolic_name
 			    ,$strain || 'unknown-strain',
 			    ,$assembly || 'unknown-assembly',
 				 ,'raw');	    
+
 	    $repository->mirror_file_by_http($mech,
 					     $path,
 					     $full_filename,
@@ -255,11 +255,15 @@ sub slurp_all {
     foreach my $url (keys %$urls) {
 	my $full_url = ($url =~ /^h/) ? $url : $self->base_url . $url;
 	if ($mech->get($full_url)) {
-	
+	    
 	    $self->log->info("Succesfully fetched the download page at $url");
 	    
 	    my $compression = $self->preferred_compression;
 	    
+	    my %data_types_seen;
+
+	    my $species_object;
+
 	    my @links = $mech->links();    
 	    foreach my $link (@links) {
 		my ($filename,$title) = $self->_check_title_tag($link);
@@ -270,7 +274,16 @@ sub slurp_all {
 		    
 		    my ($full_filename,$genus_species,$strain,$assembly) = $self->_parse_title($title,$filename);
 		    next unless $full_filename;
-		    
+	
+		    # Is this a new update?
+#		    my $is_updated = $self->check_for_updates({species => $genus_species,			
+#							       strain  => $strain,
+#							       version => $assembly,
+#							       source  => $self->symbolic_name,
+#							       });
+#		    next unless ($is_updated);
+#		    
+#		    
 #	    next unless $extracted_organism =~ /$species/i;
 #	    $self->log->debug("Extracted species matches requested species; we'll download '$full_filename'");
 		    
@@ -279,24 +292,24 @@ sub slurp_all {
 		    #    file URL - for fetching
 		    #    organism - for post-processing files
 		    #    extracted_organism - for where to mirror the file
-		    
-		    
-		    # By default, we mirror into species/raw/extracted_organism name.
-		    # This is maybe cleaner as species/STRAIN/raw...
-		    my $path = join('/',
-				    $genus_species,
+
+		    	    
+		    # We mirror to genus_species/strain/version
+		    my $path = join('/'
+				    ,$genus_species,
 				    ,$strain,
 				    ,$assembly,
-				    ,'raw');	    
-	
-		    # Save the species, strain, and assembly here. Redundant, but it works.
-		    $self->dump_version_history({ species => $genus_species,
-						    strain  => $strain,
-						    version => $assembly,
-						    path    => $path,
-						    source  => $self->symbolic_name,
-						});
-	    
+				    ,'raw');
+		    
+		    # Save the species, strain, and assembly here. Not necessary for EVERY file.		    
+		    $self->dump_version_history({ species  => $genus_species,
+						  strain   => $strain,
+						  version  => $assembly,
+						  path     => $path,
+						  filename => $full_filename,
+						  source   => $self->symbolic_name,
+					      });
+		    
 		    $self->log->debug("fetching $full_filename: $genus_species; strain: $strain; assembly $assembly\n") if $self->debug;
 		    
 		    $repository->mirror_file_by_http($mech,
@@ -304,6 +317,10 @@ sub slurp_all {
 						     $full_filename,
 						     $self->base_url . '/' . $link->url,
 						     );
+
+
+
+
 		}
 	    }
 	}
@@ -339,6 +356,23 @@ sub _parse_title {
 	if $self->debug;
     
     return ($full_filename,$full_name,$strain,$assembly);
+}
+
+
+
+# Pre-process data from this source.
+# 1. Transform genomic annotations as needed
+# 2. Massage fasta sequences
+# 3. Copy files to manualDelivery with the appropriate names
+# 4. Create necessary resource files.
+sub preprocess {
+    my $self = shift;
+}
+
+sub _preprocess_genomic_annoations {
+}
+
+sub _preprocess_genomic_fasta {
 }
 
 

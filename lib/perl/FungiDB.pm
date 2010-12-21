@@ -43,7 +43,9 @@ sub BUILD {
 
     # This is a dumb way of doing this.
     my $cwd = cwd();
-    my $conf   = new Config::General("$cwd/conf/fungidb.conf") or die "Whoops. Couldn't load the config file";    
+    my $conf   = new Config::General(-ConfigFile      => "$cwd/conf/fungidb.conf",
+				     -IncludeGlob     => "$cwd/conf/organisms.conf",
+				     -InterPolateVars => 1) or die "Whoops. Couldn't load the config file";    
     my %config = $conf->getall;
     $self->config(\%config);
 }
@@ -103,11 +105,11 @@ sub organism {
 sub repository {
     my $self = shift;
     my $args = $self->config->{repository};
-    my $repository = $self->_factory("Repository",$args);
+    my $repository = $self->factory("Repository",$args);
 }    
 
 
-sub _factory {
+sub factory {
     my $self = shift;
     my ($class,$args) = @_;
 
@@ -127,7 +129,7 @@ sub _organism_factory {
     foreach (@organisms) {
 	# Pass the configuration data hash directly
 	my $args = $self->config->{organism}->{$_};
-	push @objects,$self->_factory("Organism::$_",$args);
+	push @objects,$self->factory("Organism::$_",$args);
     }
     return @objects;
 }
@@ -140,7 +142,7 @@ sub _source_factory {
 
 	my $args = $self->config->{source}->{$_};
 #	$args->{name} = $_;
-	push @objects,$self->_factory("Source::$_",$args);
+	push @objects,$self->factory("Source::$_",$args);
     }
     return @objects;
 }
@@ -152,32 +154,50 @@ sub _build_version_history {
     my ($self,$data) = @_;
     
     my $cwd = cwd();
-    open my $log, '<',"$cwd/species_update.log" or die "Couldn't open the species_update.log: $!";
 
-    my @fields = qw/species strain version downloadpath source date_last_checked date_last_updated/;
+    my $log_file = "$cwd/logs/update.log";
+    unless (-e $log_file) {
+	system("touch $log_file");
+    }
+
+    open my $log, '<',$log_file or die "Couldn't open the update.log: $!";
+    
+    my @cols = qw/
+	species
+	strain
+	current_version
+	date_last_checked
+	date_last_updated	
+	/;
     
     my %species;
     while (<$log>) {
 	my @fields = split("\t");
 	my $c = 0;
-	foreach (@fields) {
-	    $species{$_} = $fields[$c];
+
+	# ugh
+	my %data;
+	foreach (@cols) {
+	    $data{$_} = $fields[$c];
+	    $c++;
 	}
+	$species{$fields[2]} = %data;
     }
 }
 
 
-
-
+# One line per file. Not ideal ATM but okay for now.
 sub dump_version_history { 
     my ($self,$data) = @_;
     my $cwd = cwd();
     my $date = `date +%Y-%m-%d`;
     chomp $date;
-
-    my @fields = qw/species strain version path source/;
+    $data->{date} = $date;
     
-    my $log_file = "$cwd/species_update-$date.log";
+    my @fields = qw/date species strain version source path filename/;
+    
+
+    my $log_file = "$cwd/lib/update.log";
     unless ( -e $log_file) {
 	system("touch $log_file");
 	open my $log, '>',"$log_file" or die "Couldn't open the species_update.log: $!";
@@ -185,13 +205,33 @@ sub dump_version_history {
 	close $log;
     }
     
-    open my $log, '>',"$log_file" or die "Couldn't open the species_update.log: $!";    
+    open my $log, '>>',"$log_file" or die "Couldn't open the species_update.log: $!";    
     print $log join("\t",map { $data->{$_} } @fields) . "\n";
 }
 
 
 
 
+
+sub check_for_updates {
+    my ($self,$data) = @_;
+    my $species = $data->{species};
+
+    my $version_history = $self->version_history;
+    
+    # What's the previous version?
+    my $previous_version = $version_history->{$species}->{version};
+    if ($data->{version} > $previous_version) {
+	
+	# We've been updated. Save.
+#	$self->_save_update
+	
+	
+    } else {
+	return 0;
+    }
+
+}
 
 
 

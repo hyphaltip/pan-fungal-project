@@ -6,6 +6,7 @@ use FindBin qw/$Bin/;
 
 use Test::More qw/no_plan/;
 
+use lib "$Bin/../lib/perl";
 use FungiDB::Repository;
 
 BEGIN {
@@ -21,4 +22,5 @@ $repository->establish("$Bin/../test-data-repository");
 
 my $root = $repository->root;
 ok ($root,"fetched the root location of repository: $root");
+
 

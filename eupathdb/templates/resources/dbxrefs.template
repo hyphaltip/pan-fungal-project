@@ -1,0 +1,209 @@
+<!-- //////////////////////
+           DBXREFS
+     ////////////////////// -->
+   
+   <!-- EC IDs -->
+   <resource
+          resource="[% symbolic_name %]_ec_ids_RSRC" 
+          version="@@[% symbolic_name %]_VER@@"
+          plugin="GUS::Community::Plugin::InsertECMapping">
+
+         <!-- CUSTOMIZE -->
+        <wgetArgs url="">
+               --tries=5 
+               --mirror 
+               --no-parent
+               --no-host-directories
+               --cut-dirs=5
+         </wgetArgs>
+
+         <!--
+         <manualGet fileOrDir="FungiDB/[% symbolic_name %]/IDs/%RESOURCE_VERSION%" />
+         -->
+
+         <unpack>
+              fungidb_unpack_sgd_ids.pl
+                 --input @@dataDir@@/dbxref.tab
+                 --output @@dataDir@@/ec_numbers.tab
+                 --db IUBMB
+                 --type "EC number"
+         </unpack>
+
+         <pluginArgs>
+              --ECMappingFile @@dataDir@@/ec_numbers.tab
+              --evidenceCode ""
+              --aaSeqLocusTagMappingSql "SELECT aa_sequence_id FROM dots.GeneFeature g, dots.Transcript t, dots.TranslatedAAFeature taf WHERE g.source_id = ? AND g.na_feature_id = t.parent_id AND t.na_feature_id = taf.na_feature_id"
+        </pluginArgs>
+    
+        <info
+           displayName="[% long_name %] EC IDs"
+           project="FungiDB"
+           organisms="@@[% symbolic_name %]_ORGANISM_FULL_NAME@@"
+           category="Proteome"
+           publicUrl=""
+           contact=""
+           email=""
+           institution=@@[% symbolic_name %]_GENOME_SOURCE@@">
+           <description>
+           <![CDATA[   
+               [% long_name %] EC IDs.
+            ]]>
+          </description>
+      </info>
+   </resource>
+
+    <!-- GeneIDs to refseq -->
+    <resource resource="[% symbolic_name %]_refseq_dbxrefs_RSRC"
+              version="@@[% symbolic_name %]_VER@@"
+              plugin="ApiCommonData::Load::Plugin::InsertDBxRefs">
+
+         <wgetArgs url="">
+               --tries=5 
+               --mirror 
+                --no-parent
+               --no-host-directories
+               --cut-dirs=5
+         </wgetArgs>
+ 
+         <unpack>gunzip @@dataDir/CGDID_2_RefSeqID.tab.gz</unpack>
+
+         <unpack>
+             fungidb_map_candida_ids_to_features.pl
+                --input               @@dataDir@@/C_albicans_SC5314_A21_chromosomal_feature.tab
+                --id_to_dbxref        @@dataDir@@/CGDID_2_RefSeqID.tab
+                --output @@dataDir    @@/geneid2entrez.tab
+                --prefix @@[% symbolic_name %]_ORGANISM_ABBREVIATION@@
+         </unpack>
+ 
+         <pluginArgs>
+              --DbRefMappingFile @@dataDir@@/gene2entrez.tab
+              --extDbName %RESOURCE_NAME%
+              --extDbReleaseNumber %RESOURCE_VERSION%
+              --columnSpec "primary_identifier,secondary_identifier"
+              --tableName "DbRefNAFeature" 
+              --geneExternalDatabaseSpec '[% symbolic_name %]_RSRC|@@[% symbolic_name %]_VER@@'
+          </pluginArgs>
+ 
+          <info
+               displayName="[% long_name %] Gene ID to Entrez dbxrefs"
+               project="FungiDB"
+               organisms="@@[% symbolic_name %]_VER@@"
+               category="ignore"
+               publicUrl=""
+               contact=""
+               email=""
+               institution=@@[% symbolic_name %]_GENOME_SOURCE@@">
+               <description>
+                   <![CDATA[
+                        [% long_name %] Gene ID to Entrez dbxrefs.
+                  ]]>
+                </description>
+          </info>
+     </resource>
+
+
+     <resource resource="[% symbolic_name %]_uniprot_dbxrefs_RSRC"
+               version="@@[% symbolic_name %]_VER@@"
+               plugin="ApiCommonData::Load::Plugin::InsertDBxRefs">
+
+        <wgetArgs url="">
+               --tries=5 
+               --mirror 
+                --no-parent
+               --no-host-directories
+               --cut-dirs=5
+         </wgetArgs>
+ 
+         <unpack>gunzip @@dataDir/gp2protein.cgd.gz</unpack>
+
+         <unpack>
+             fungidb_map_candida_ids_to_features.pl
+                --input               @@dataDir@@/FILE.tab
+                --id_to_dbxref        @@dataDir@@/gp2protein.cgd
+                --output @@dataDir    @@/geneid2uniprot.tab
+                --prefix @@[% symbolic_name %]_ORGANISM_ABBREVIATION@@
+         </unpack>
+
+         <pluginArgs>
+               --DbRefMappingFile @@dataDir@@/geneid2uniprot.tab
+               --extDbName %RESOURCE_NAME%
+               --extDbReleaseNumber %RESOURCE_VERSION%
+               --columnSpec "primary_identifier,secondary_identifier"
+               --tableName "DbRefNAFeature"
+               --geneExternalDatabaseSpec '[% symbolic_name %]_RSRC|@@[% symbolic_name %]_VER@@'
+         </pluginArgs>
+
+         <info
+              displayName="[% long_name %] Gene IDs to UniProt dbxrefs"
+              project="FungiDB"
+              organisms="@@[% symbolic_name %]_ORGANISM_FULL_NAME@@"
+              category="ignore"
+              publicUrl=""
+              contact=""
+              email=""
+              institution=@@[% symbolic_name %]_GENOME_SOURCE@@">
+             <description>
+                <![CDATA[  
+                  [% long_name %] Gene IDs to UniProt IDs.
+                ]]>
+             </description>
+          </info>
+      </resource>
+
+
+       <!-- EC IDs -->
+       <subgraph name="saccharomyces_cerevisiae_s288c_ec_ids_RSRC" xmlFile="loadResource.xml">
+          <paramValue name="resourceName">saccharomyces_cerevisiae_s288c_ec_ids_RSRC</paramValue>
+          <paramValue name="resourceXmlFileName">$$organismResourceXmlFile$$</paramValue>
+          <paramValue name="parentDataDir">$$dataDir$$</paramValue>
+          <depends name="makeDataDir"/>
+          <dependsGlobal name="enzymeDB_RSRC"/>
+      </subgraph>
+
+      <!-- Uniprot -->
+      <subgraph name="saccharomyces_cerevisiae_s288c_uniprot_dbxrefs_RSRC" xmlFile="loadResource.xml">
+          <paramValue name="resourceName">saccharomyces_cerevisiae_s288c_uniprot_dbxrefs_RSRC</paramValue>
+          <paramValue name="resourceXmlFileName">$$organismResourceXmlFile$$</paramValue>
+          <paramValue name="parentDataDir">$$dataDir$$</paramValue>
+          <depends name="makeDataDir"/>
+      </subgraph>
+
+      <!-- Candida -->
+      <subgraph name="saccharomyces_cerevisiae_s288c_candida_dbxrefs_RSRC" xmlFile="loadResource.xml">
+          <paramValue name="resourceName">saccharomyces_cerevisiae_s288c_candida_dbxrefs_RSRC</paramValue>
+          <paramValue name="resourceXmlFileName">$$organismResourceXmlFile$$</paramValue>
+          <paramValue name="parentDataDir">$$dataDir$$</paramValue>
+          <depends name="makeDataDir"/>
+      </subgraph>
+
+      <!-- Refseq: Protein IDs: resources.xml probably needs to be updated to attach these to protein IDs -->
+      <subgraph name="saccharomyces_cerevisiae_s288c_refseq_dbxrefs_RSRC" xmlFile="loadResource.xml">
+          <paramValue name="resourceName">saccharomyces_cerevisiae_s288c_refseq_dbxrefs_RSRC</paramValue>
+          <paramValue name="resourceXmlFileName">$$organismResourceXmlFile$$</paramValue>
+          <paramValue name="parentDataDir">$$dataDir$$</paramValue>
+          <depends name="makeDataDir"/>
+      </subgraph>
+
+      <!-- Refseq -->
+      <subgraph name="saccharomyces_cerevisiae_s288c_refseq_na_dbxrefs_RSRC" xmlFile="loadResource.xml">
+          <paramValue name="resourceName">saccharomyces_cerevisiae_s288c_refseq_na_dbxrefs_RSRC</paramValue>
+          <paramValue name="resourceXmlFileName">$$organismResourceXmlFile$$</paramValue>
+          <paramValue name="parentDataDir">$$dataDir$$</paramValue>
+          <depends name="makeDataDir"/>
+      </subgraph>
+
+      <!-- Refseq Gene -->
+      <subgraph name="saccharomyces_cerevisiae_s288c_refseq_gene_dbxrefs_RSRC" xmlFile="loadResource.xml">
+          <paramValue name="resourceName">saccharomyces_cerevisiae_s288c_refseq_gene_dbxrefs_RSRC</paramValue>
+          <paramValue name="resourceXmlFileName">$$organismResourceXmlFile$$</paramValue>
+          <paramValue name="parentDataDir">$$dataDir$$</paramValue>
+          <depends name="makeDataDir"/>
+      </subgraph>
+
+      <!-- Metacyc -->
+      <subgraph name="saccharomyces_cerevisiae_s288c_metacyc_dbxrefs_RSRC" xmlFile="loadResource.xml">
+          <paramValue name="resourceName">saccharomyces_cerevisiae_s288c_metacyc_dbxrefs_RSRC</paramValue>
+          <paramValue name="resourceXmlFileName">$$organismResourceXmlFile$$</paramValue>
+          <paramValue name="parentDataDir">$$dataDir$$</paramValue>
+          <depends name="makeDataDir"/>
+      </subgraph>

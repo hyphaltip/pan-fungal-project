@@ -1,0 +1,52 @@
+<!-- ////////////////////////////////////////////////
+
+       [% long_name %]: ISF workflow
+
+    ////////////////////////////////////////////////  -->
+
+<workflowGraph name="[% symbolic_name %]_workflow_ISF">
+      <param name="organismResourceXmlFile"/>
+      <param name="dataDir"/>
+
+    <constant name="dataDir">$$dataDir$$/[% symbolic_name %]_ISF</constant>
+
+    <step name="makeDataDir" stepClass="ApiCommonWorkflow::Main::WorkflowSteps::MakeDataDir">
+      <paramValue name="dataDir">$$dataDir$$</paramValue>
+    </step>
+
+  <!-- genome sequence -->
+  <subgraph name="[% symbolic_name %]_genome_sequence_RSRC" xmlFile="loadResource.xml">
+    <paramValue name="resourceName">[% symbolic_name %]_genome_sequence_RSRC</paramValue>
+    <paramValue name="resourceXmlFileName">$$organismResourceXmlFile$$</paramValue>
+    <paramValue name="parentDataDir">$$dataDir$$</paramValue>
+      <depends name="makeDataDir"/>
+  </subgraph>
+
+  <!-- genome annotations -->
+  <subgraph name="[% symbolic_name %]_genome_annotations_RSRC" xmlFile="loadResource.xml">
+    <paramValue name="resourceName">[% symbolic_name %]_genome_annotations_RSRC</paramValue>
+    <paramValue name="resourceXmlFileName">$$organismResourceXmlFile$$</paramValue>
+    <paramValue name="parentDataDir">$$dataDir$$</paramValue>
+      <depends name="[% symbolic_name %]_genome_sequence_RSRC"/>
+  </subgraph>
+
+  <!-- Mito: skip
+  <subgraph name="[% symbolic_name %]_mito_RSRC" xmlFile="loadResource.xml">
+    <paramValue name="resourceName">[% symbolic_name %]_mito_RSRC</paramValue>
+    <paramValue name="resourceXmlFileName">$$organismResourceXmlFile$$</paramValue>
+    <paramValue name="parentDataDir">$$dataDir$$</paramValue>
+      <depends name="[% symbolic_name %]_genome_sequence_RSRC"/>
+  </subgraph>
+  -->
+
+  <!-- Previous aliases: skip
+  <subgraph name="[% symbolic_name %]_previous_aliases_RSRC" xmlFile="loadResource.xml">
+    <paramValue name="resourceName">[% symbolic_name %]_previous_aliases_RSRC</paramValue>
+    <paramValue name="resourceXmlFileName">$$organismResourceXmlFile$$</paramValue>
+    <paramValue name="parentDataDir">$$dataDir$$</paramValue>
+      <depends name="[% symbolic_name %]_genome_annotations_RSRC"/>
+      <depends name="[% symbolic_name %]_mito_RSRC"/>
+  </subgraph>
+  -->
+
+</workflowGraph>

@@ -1,0 +1,5 @@
+name=FungiDB
+version=0.1
+workflowXmlFile=fungidb/fungiWorkflow.xml
+workflowTable=apidb.workflow
+workflowStepTable=apidb.workflowstep

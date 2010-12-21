@@ -1,0 +1,63 @@
+<!-- //////////////////////
+           ONTOLOGIES
+     ////////////////////// -->
+
+     <!-- GO -->
+     <resource 
+         resource="[% symbolic_name %]_go_associations_RSRC"
+         version="@@[% symbolic_name %]_GO_ASSOCIATIONS_VER@@"
+         plugin="ApiCommonData::Load::Plugin::InsertGOAssociationsSimple">
+
+        <!-- CUSTOMIZE -->
+        <wgetArgs url="">
+               --tries=5 
+               --mirror 
+                --no-parent
+               --no-host-directories
+               --cut-dirs=5
+         </wgetArgs>
+
+         <unpack>gunzip @@dataDir/gene_association.cgd.gz</unpack>
+
+<!--
+         <manualGet 
+              fileOrDir="FungiDB/[% symbolic_name %]/gene_ontology/@@[% symbolic_name %]_GO_ASSOCIATIONS_VER@@/gene_association.cgd" /> 
+-->
+
+         <unpack>
+                fungidb_prepend_fungidb_identifier.pl
+                     --input @@dataDir@@/gene_association.sgd
+                     --output @@dataDir@@/gene_association.uniquified.sgd
+                     --prefix @@[% symbolic_name %]_ORGANISM_ABBREVIATION@@
+                     --col 2
+                     --verbose
+         </unpack>
+
+         <pluginArgs>
+               --externalDatabaseSpec "%RESOURCE_NAME%|%RESOURCE_VERSION%"
+               --inputFile @@dataDir@@/gene_association.cgd
+               --goExternalDatabaseSpec "GO_RSRC|@@GO_VER@@"
+               --seqIdSql "SELECT g.source_id, taf.aa_sequence_id FROM dots.genefeature g, dots.transcript t, dots.translatedAAFeature taf WHERE g.na_feature_id = t.parent_id AND t.na_feature_id = taf.na_feature_id UNION SELECT taf.source_id, taf.aa_sequence_id FROM dots.translatedAAFeature taf"
+              --targetTable "DoTS::TranslatedAASequence"
+              --lineOfEvidence ""
+              --inputIdColumn id
+              --tolerateMissingSeqs
+              --skipBadGOTerms @@dataDir@@/badGOTerms.log
+         </pluginArgs>
+
+         <info
+              displayName="[% long_name %] GO associations"
+              project="FungiDB"
+              organisms="@@[% symbolic_name %]_ORGANISM_FULL_NAME@@"
+              category="Proteome"
+              publicUrl=""
+              contact=""
+              email=""
+              institution=@@[% symbolic_name %]_GENOME_SOURCE@@">
+              <description>
+                 <![CDATA[
+                     [% long_name %] GO associations.
+                 ]]>
+              </description>
+          </info>
+   </resource>

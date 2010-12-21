@@ -29,7 +29,7 @@ sub _build_readme_filename {
     return $self->config->{repository}->{readme_filename};
 }
 
-sub _build_versioN_filename {
+sub _build_version_filename {
     my $self = shift;
     return $self->config->{repository}->{version_filename};
 }
@@ -180,6 +180,30 @@ sub mirror_file_by_http {
     }
 }
 
+
+
+# Crawl the root repository to get a list of species/strains/versions that exist
+sub crawl {
+    my $self = shift;
+    my $data;
+    my $root = $self->root . '/by_species';
+
+    opendir (my $dh,$root) or die "Couldn't open $root: $!";
+    while (my $species = readdir($dh)) {
+	next if $species =~ /^\./;
+	opendir (my $strain_dh,"$root/$species") or die "Couldn't open $root/$species: $!";
+	while (my $strain = readdir($strain_dh)) {
+	    next if $strain =~ /^\./;	    
+	    opendir (my $version_dh,"$root/$species/$strain") or die "Couldn't open $root/$species/$strain: $!";
+	    while (my $version = readdir($version_dh)) {
+		next if $version =~ /^\./;
+		push @{$data},[$species,$strain,$version];
+		print "$species $strain $version\n";
+	    }
+	}
+    }
+    return $data;
+}
 
 
 

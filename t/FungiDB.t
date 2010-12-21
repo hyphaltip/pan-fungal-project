@@ -4,7 +4,8 @@ use strict;
 use warnings;
 
 use Test::More qw/no_plan/;
-
+use FindBin qw/$Bin/;
+use lib "$Bin/../lib/perl";
 use FungiDB;
 
 BEGIN {
