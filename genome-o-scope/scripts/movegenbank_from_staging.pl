@@ -13,9 +13,12 @@ use File::Rsync;
 my $SEP = ':';
 
 my ($force,$debug);
+my $taxdir = '/data/databases/taxonomy';
+
 GetOptions(
 	   'f|force' => \$force,
 	   'd|debug' => \$debug,
+	   't|taxdir:s' => \$taxdir,
 	   );
 
 if( $force ) {
@@ -28,7 +31,6 @@ my %exe = ('bz2' => '/usr/bin/bzip2 -c',
 	   'gz'  => '/bin/zcat',
 	   'Z'   => '/bin/zcat');
 
-my $taxdir = '/data/databases/taxonomy';
 my $taxdb = Bio::DB::Taxonomy->new(-source => 'flatfile',
                                    -nodesfile => File::Spec->catfile
                                    ($taxdir,'nodes.dmp'),
