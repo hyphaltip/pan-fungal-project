@@ -1,5 +1,6 @@
 #!/usr/bin/perl -w
-# author Jason Stajich <jason_stajich@berkeley.edu>
+use Env qw(HOME);
+# author Jason Stajich <jason.stajich@ucr.edu>
 
 =head1 NAME
 
@@ -10,8 +11,9 @@ This will write out GFF3, NT, PEP, INTRON, and CDS files where needed
 =cut
 
 use strict;
-use lib '/home/stajich/src/lwf';
-use Bio::SeqFeature::Slim;
+use lib "$HOME/src/bioperl/dev";
+use Bio::SeqFeature::Slim; # for speed -- this is from github.com/bioperl/bioperl-dev
+#use Bio::SeqFeature::Generic;
 use Bio::SeqIO;
 use Getopt::Long;
 
@@ -70,7 +72,9 @@ SP: for my $species ( readdir(DIR) ) {
     opendir(S,$sppath) || die "$sppath: $!";
     for my $strain ( readdir(S) ) {
 	next if $strain =~ /^\./;
-	my $prefix = substr($genus,0,1).substr($spp,0,3). "_$strain";
+	my $straintmp = $strain;
+	$straintmp =~ s/_//g;
+	my $prefix = substr($genus,0,1).substr($spp,0,3). "_$straintmp";
 	# skip files
 	next if ! -d File::Spec->catfile($sppath,$strain); 
 	warn(" ---> $strain\n") if $debug;
@@ -146,7 +150,8 @@ SP: for my $species ( readdir(DIR) ) {
 					       $seq->description,
 					       $seq->accession_number);
 			my ($shortid,$id);
-			if( $desc =~ /chromosome\s+(\S+),/ ||
+			if( $desc =~ /chromosome\s+(\S+)[,\.]/ ||
+			    $desc =~ /chromosome\s+(\S+)\s+complete/ ||
 			    $desc =~ /chromosome\s+((?:scaffold|cont\w+)\s*\S+)/ ) {
 			    $shortid = $1;
 			    $shortid =~ s/,(\s+complete)?\s*$//;
@@ -304,11 +309,11 @@ sub extract_features {
 	$geneseq->description(sprintf("%s:%s",$seq_id,$f->location->to_FTstring));
 	$fh->{'gene'}->write_seq($geneseq);
 	
-	my $mrnact = 1;
+	my $mrnact = 0;
 	# reprocess mRNAs fully
 	for my $mRNA ( @mrnas ) {
 	    my $mrna_name = $pname;
-	    $mrna_name = "$pname.t".$mrnact++;
+	    $mrna_name = "$pname"."T".$mrnact++;
  	    my $unique_mrnaid = sprintf("mrna%06d", $counts->{'mrna'}++);
 	    my $mrnaf = Bio::SeqFeature::Slim->new(
 					       -seq_id => $seq_id,
