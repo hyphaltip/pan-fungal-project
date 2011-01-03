@@ -1,0 +1,7 @@
+mirror_and_process_broad_data.sh
+
+   This is a new and simpler script for fetching and preprocessing data from Broad.
+
+mirror_broad_data.pl
+
+   This is the old generic spider.

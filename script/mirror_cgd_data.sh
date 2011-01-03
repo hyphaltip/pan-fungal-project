@@ -33,8 +33,8 @@ cd ${DESTINATION_ROOT}/genome/${ASSEMBLY}
 create_source "${DATE}: ${ASSEMBLY}"
 
 CORE_ANNOTATIONS=("
-    http://candidagenome.org/download/gff/C_albicans_SC5314/C_albicans_SC5314_A21_features_with_chromosome_sequences.gff.gz
-    http://candidagenome.org/download/chromosomal_feature_files/C_albicans_SC5314/C_albicans_SC5314_A21_chromosomal_feature.tab
+    http://candidagenome.org/download/gff/C_albicans_SC5314/C_albicans_SC5314_${ASSEMBLY}_features_with_chromosome_sequences.gff.gz
+    http://candidagenome.org/download/chromosomal_feature_files/C_albicans_SC5314/C_albicans_SC5314_${ASSEMBLY}_chromosomal_feature.tab
 ")
 
 
@@ -108,3 +108,38 @@ curl -O http://candidagenome.org/download/External_id_mappings/CGDID_2_GeneID.ta
 curl -O http://candidagenome.org/download/External_id_mappings/CGDID_2_RefSeqID.tab.gz
 curl -O http://candidagenome.org/download/External_id_mappings/gp2protein.cgd.gz
 curl -O http://candidagenome.org/download/External_id_mappings/README
+
+
+
+
+
+
+
+# Do some post-processing of core genomic annotations
+cd ${DESTINATION_ROOT}/genome/${ASSEMBLY}
+
+mv C_albicans_SC5314_${ASSEMBLY}_features_with_chromosome_sequences.gff.gz candida_albicans_sc5314.gff3.gz
+gunzip candida_albicans_sc5314.gff3.gz
+
+# Uniquify
+fungidb_uniquify_and_standardize_seqids.pl \
+     --input  ${DESTINATION_ROOT}/genome/${ASSEMBLY}/genome/candida_albicans_sc5314.gff3 \
+     --output ${DESTINATION_ROOT}/genome/${ASSEMBLY}/candida_albicans_sc5314.uniquified.gff3 \
+     --prefix ${DESTINATION_ROOT}/genome/${ASSEMBLY}/CalbSC5314 \
+     --ignore_contigs \
+     --mapping_file ${DESTINATION_ROOT}/genome/${ASSEMBLY}/primary_gene_aliases.tab
+
+
+# Split fasta from GFF
+makeCustomFastaAndGffFromGff3
+     --input_dir ${DESTINATION_ROOT}/genome/${ASSEMBLY}/candida_albicans_sc5314.gff3 \
+     --inputFileExt gff3 \
+     --output_fasta ${DESTINATION_ROOT}/genome/${ASSEMBLY}/candida_albicans_sc5314.unpacked.fasta \
+     --output_gff   ${DESTINATION_ROOT}/genome/${ASSEMBLY}/candida_albicans_sc5314.unpacked.gff3
+
+
+# Standard ISF pre-processing step
+preprocessGFF3 
+     --input_gff  ${DESTINATION_ROOT}/genome/${ASSEMBLY}/candida_albicans_sc5314.unpacked.gff3
+     --output_gff ${DESTINATION_ROOT}/genome/${ASSEMBLY}/candida_albicans_sc5314.transformed.gff3
+
