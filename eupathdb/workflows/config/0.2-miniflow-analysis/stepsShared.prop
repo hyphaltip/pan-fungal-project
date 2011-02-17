@@ -1,0 +1,400 @@
+# config properties used by many steps
+# these are not validated until step run time, so use judiciously
+
+projectName=FungiDB
+projectVersion=1.0
+
+apiSiteFilesDir=/files/cbil/data/cbil/apiSiteFiles
+
+clusterBaseDir=/genomics/binf/scratch
+clusterQueue=apidb
+nodeClass=DJob::DistribJob::SgeNode
+nodePath=/scratch/user/$ENV{USER}
+clusterServer=beta.genomics.upenn.edu
+
+gusHome=$ENV{GUS_HOME}
+
+manualDeliveryDir=/files/cbil/data/cbil/EuPathDB/manualDelivery
+
+# Tuning manager-specific settings
+#email=weili1@pcbi.upenn.edu
+email=tharris@fungidb.org
+instance=fung-rbld
+tuningMangerPassword=po34weep
+
+dbestConnect = dbi:Oracle:dbst100n
+dbestLogin = pinney
+dbestPswd = Xtn34o
+
+# resource versions
+# consumed by both resource and workflow xml
+
+###global
+GO_VER=1.1439
+SO_VER=1.45
+NRDB_VER=2010-09-18
+InterproscanData_VER=28.0
+taxonomy_VER=2010-09-22
+PDBProteinSequences_VER=2010-09-17
+
+AllOrganismNames=NA
+
+
+# Define some vars for use in Workflows and Resources
+# TEMPLATE
+# genus_species_strain_VER=unknown                   # _VER generic version; probably best to tie most things to GENOME_SEQUENCE_VER
+# genus_species_strain_GENOME_SOURCE=STRING          # Broad|AspGD/SGD/JGI/JCVI/etc
+# genus_species_strain_GENOME_SEQUENCE_VER=INT       # Current version of the assembly
+# genus_species_strain_GENOME_SIZE=28000000          # (approx) size in MB
+# genus_species_strain_FUNGIDB_DISPLAY_NAME=STRING   # Species display name
+# genus_species_strain_FUNGIDB_ABBREVIATION=STRING   # String used by FungiDB to uniquify IDs
+# genus_species_strain_NCBI_TAXONOMY_ID=INT          # http://ncbi.nlm.nih.gov/Taxonomy/Browser
+# genus_species_strain_NCBI_PARENT_TAXONOMY_ID=INT   #   "
+# genus_species_strain_NCBI_DISPLAY_NAME=STRING      # String which exactly matches NCBIs in the Taxonomy Browser, usually ugly.
+# genus_species_strain_DBEST_VER=2010-06-17          #
+# genus_species_strain_TAXON_HIERARCHY_FOR_BLASTX=   # Eukaryota Fungi Ascomycota, eg
+# genus_species_strain_GO_ASSOCIATIONS_VER=INT       # Version of GO associations
+
+
+#############################################
+#
+# Species (alphabetical)
+#
+#############################################
+
+# Aspergillus clavatus (NRRL 1; Broad)
+aspergillus_clavatus_nrrl1_VER=1
+aspergillus_clavatus_nrrl1_GENOME_SOURCE=Broad
+aspergillus_clavatus_nrrl1_GENOME_SEQUENCE_VER=1
+aspergillus_clavatus_nrrl1_GENOME_SIZE=28000000
+aspergillus_clavatus_nrrl1_FUNGIDB_DISPLAY_NAME=Aspergillus clavatus (NRRL 1)
+aspergillus_clavatus_nrrl1_FUNGIDB_ABBREVIATION=AclaNRRL1
+aspergillus_clavatus_nrrl1_NCBI_TAXONOMY_ID=344612
+aspergillus_clavatus_nrrl1_NCBI_PARENT_TAXONOMY_ID=5057
+aspergillus_clavatus_nrrl1_NCBI_DISPLAY_NAME=Aspergillus clavatus NRRL 1
+aspergillus_clavatus_nrrl1_DBEST_VER=2010-06-17
+aspergillus_clavatus_nrrl1_TAXON_HIERARCHY_FOR_BLASTX=Eukaryota Fungi Ascomycota
+aspergillus_clavatus_nrrl1_GO_ASSOCIATIONS_VER=unknown
+
+# Aspergillus flavus (unknown; Broad)
+aspergillus_flavus_na_VER=2
+aspergillus_flavus_na_GENOME_SOURCE=Broad
+aspergillus_flavus_na_GENOME_SEQUENCE_VER=2
+aspergillus_flavus_na_GENOME_SIZE=37000000
+aspergillus_flavus_na_FUNGIDB_DISPLAY_NAME=Aspergillus flavus
+aspergillus_flavus_na_FUNGIDB_ABBREVIATION=AflaNA
+aspergillus_flavus_na_NCBI_TAXONOMY_ID=5059
+aspergillus_flavus_na_NCBI_PARENT_TAXONOMY_ID=5052
+aspergillus_flavus_na_NCBI_DISPLAY_NAME=Aspergillus flavus
+aspergillus_flavus_na_DBEST_VER=2010-06-17
+aspergillus_flavus_na_TAXON_HIERARCHY_FOR_BLASTX=Eukaryota Fungi Ascomycota
+aspergillus_flavus_na_GO_ASSOCIATIONS_VER=unknown
+
+# Aspergillus fumigatus (Af293; Broad)
+aspergillus_fumigatus_af293_VER=2
+aspergillus_fumigatus_af293_GENOME_SOURCE=Broad
+aspergillus_fumigatus_af293_GENOME_SEQUENCE_VER=2
+aspergillus_fumigatus_af293_GENOME_SIZE=30000000
+aspergillus_fumigatus_af293_FUNGIDB_DISPLAY_NAME=Aspergillus fumigatus (Af293)
+aspergillus_fumigatus_af293_FUNGIDB_ABBREVIATION=AfumAF293B
+aspergillus_fumigatus_af293_NCBI_TAXONOMY_ID=330879
+aspergillus_fumigatus_af293_NCBI_PARENT_TAXONOMY_ID=5085
+aspergillus_fumigatus_af293_NCBI_DISPLAY_NAME=Aspergillus fumigatus Af293
+aspergillus_fumigatus_af293_DBEST_VER=2010-06-17
+aspergillus_fumigatus_af293_TAXON_HIERARCHY_FOR_BLASTX=Eukaryota Fungi Ascomycota
+aspergillus_fumigatus_af293_GO_ASSOCIATIONS_VER=unknown
+
+# Aspergillus nidulans (A4; Broad)
+aspergillus_nidulans_a4_VER=1
+aspergillus_nidulans_a4_GENOME_SOURCE=Broad
+aspergillus_nidulans_a4_GENOME_SEQUENCE_VER=1
+aspergillus_nidulans_a4_GENOME_SIZE=30000000
+aspergillus_nidulans_a4_FUNGIDB_DISPLAY_NAME=Aspergillus nidulans (A4)
+aspergillus_nidulans_a4_FUNGIDB_ABBREVIATION=AnidA4
+aspergillus_nidulans_a4_NCBI_TAXONOMY_ID=227321
+aspergillus_nidulans_a4_NCBI_PARENT_TAXONOMY_ID=162425
+aspergillus_nidulans_a4_NCBI_DISPLAY_NAME=Aspergillus nidulans FSGC A4
+aspergillus_nidulans_a4_DBEST_VER=2010-06-17
+aspergillus_nidulans_a4_TAXON_HIERARCHY_FOR_BLASTX=Eukaryota Fungi Ascomycota
+aspergillus_nidulans_a4_GO_ASSOCIATIONS_VER=1
+
+# Aspergillus nidulans (A4; AspGD)
+aspergillus_nidulans_a4_aspgd_VER=2011-01-05
+aspergillus_nidulans_a4_aspgd_GENOME_SOURCE=AspGD
+aspergillus_nidulans_a4_aspgd_GENOME_SEQUENCE_VER=2011-01-05
+aspergillus_nidulans_a4_aspgd_GENOME_SIZE=30000000
+aspergillus_nidulans_a4_aspgd_FUNGIDB_DISPLAY_NAME=Aspergillus nidulans (A4) AspGD
+aspergillus_nidulans_a4_aspgd_FUNGIDB_ABBREVIATION=AnidA4A
+aspergillus_nidulans_a4_aspgd_NCBI_TAXONOMY_ID=227321
+aspergillus_nidulans_a4_aspgd_NCBI_PARENT_TAXONOMY_ID=162425
+aspergillus_nidulans_a4_aspgd_NCBI_DISPLAY_NAME=Aspergillus nidulans FSGC A4
+aspergillus_nidulans_a4_aspgd_DBEST_VER=2010-06-17
+aspergillus_nidulans_a4_aspgd_TAXON_HIERARCHY_FOR_BLASTX=Eukaryota Fungi Ascomycota
+aspergillus_nidulans_a4_aspgd_GO_ASSOCIATIONS_VER=1
+
+# Aspergillus niger (unknown; Broad)
+aspergillus_niger_na_VER=1
+aspergillus_niger_na_GENOME_SOURCE=Broad
+aspergillus_niger_na_GENOME_SEQUENCE_VER=1
+aspergillus_niger_na_GENOME_SIZE=39000000
+aspergillus_niger_na_FUNGIDB_DISPLAY_NAME=Aspergillus niger
+aspergillus_niger_na_FUNGIDB_ABBREVIATION=AnigNA
+aspergillus_niger_na_NCBI_TAXONOMY_ID=5061
+aspergillus_niger_na_NCBI_PARENT_TAXONOMY_ID=5052
+aspergillus_niger_na_NCBI_DISPLAY_NAME=Aspergillus niger
+aspergillus_niger_na_DBEST_VER=2010-06-17
+aspergillus_niger_na_TAXON_HIERARCHY_FOR_BLASTX=Eukaryota Fungi Ascomycota
+aspergillus_niger_na_GO_ASSOCIATIONS_VER=1
+
+# Aspergillus terreus (unknown; Broad)
+aspergillus_terreus_na_VER=1
+aspergillus_terreus_na_GENOME_SOURCE=Broad
+aspergillus_terreus_na_GENOME_SEQUENCE_VER=1
+aspergillus_terreus_na_GENOME_SIZE=30000000
+aspergillus_terreus_na_FUNGIDB_DISPLAY_NAME=Aspergillus terreus
+aspergillus_terreus_na_FUNGIDB_ABBREVIATION=AterNA
+aspergillus_terreus_na_NCBI_TAXONOMY_ID=33178
+aspergillus_terreus_na_NCBI_PARENT_TAXONOMY_ID=5052
+aspergillus_terreus_na_NCBI_DISPLAY_NAME=Aspergillus terreus
+aspergillus_terreus_na_DBEST_VER=2010-06-17
+aspergillus_terreus_na_TAXON_HIERARCHY_FOR_BLASTX=Eukaryota Fungi Ascomycota
+aspergillus_terreus_na_GO_ASSOCIATIONS_VER=1
+
+# Candida albicans
+candida_albicans_sc5314_VER=A21
+candida_albicans_sc5314_GENOME_SEQUENCE_VER=A21
+candida_albicans_sc5314_GENOME_SOURCE=CGD
+candida_albicans_sc5314_GENOME_SIZE=14000000
+candida_albicans_sc5314_FUNGIDB_DISPLAY_NAME=Candida albicans (SC5314)
+candida_albicans_sc5314_FUNGIDB_ABBREVIATION=CalbSC5314
+candida_albicans_sc5314_GO_ASSOCIATIONS_VER=A21
+# Historical and deprecated
+candida_albicans_sc5314_uniprot_dbxrefs_VER=A21
+candida_albicans_sc5314_NCBI_TAXONOMY_ID=237561
+candida_albicans_sc5314_NCBI_PARENT_TAXONOMY_ID=5476
+candida_albicans_sc5314_NCBI_DISPLAY_NAME=Candida albicans SC5314
+candida_albicans_sc5314_TAXON_HIERARCHY_FOR_BLASTX=Eukaryota Fungi Ascomycota
+candida_albicans_sc5314_DBEST_VER=2010-06-17
+
+# Coccidiodes immitis (RS; Broad)
+coccidioides_immitis_rs_VER=3
+coccidioides_immitis_rs_GENOME_SOURCE=Broad
+coccidioides_immitis_rs_GENOME_SEQUENCE_VER=3
+coccidioides_immitis_rs_GENOME_SIZE=29000000
+coccidioides_immitis_rs_FUNGIDB_DISPLAY_NAME=Coccidioides immitis (RS)
+coccidioides_immitis_rs_FUNGIDB_ABBREVIATION=CimmRS
+coccidioides_immitis_rs_NCBI_TAXONOMY_ID=246410
+coccidioides_immitis_rs_NCBI_PARENT_TAXONOMY_ID=5501
+coccidioides_immitis_rs_NCBI_DISPLAY_NAME=Coccidioides immitis RS
+coccidioides_immitis_rs_DBEST_VER=2010-06-17
+coccidioides_immitis_rs_TAXON_HIERARCHY_FOR_BLASTX=Eukaryota Fungi Ascomycota
+coccidioides_immitis_rs_GO_ASSOCIATIONS_VER=3
+
+# Coccidiodes immitis (H538.4; Broad)
+coccidioides_immitis_h5384_VER=1
+coccidioides_immitis_h5384_GENOME_SOURCE=Broad
+coccidioides_immitis_h5384_GENOME_SEQUENCE_VER=1
+coccidioides_immitis_h5384_GENOME_SIZE=28000000
+coccidioides_immitis_h5384_FUNGIDB_DISPLAY_NAME=Coccidioides immitis (H538.4)
+coccidioides_immitis_h5384_FUNGIDB_ABBREVIATION=CimmH5384
+coccidioides_immitis_h5384_NCBI_TAXONOMY_ID=396776
+coccidioides_immitis_h5384_NCBI_PARENT_TAXONOMY_ID=5501
+coccidioides_immitis_h5384_NCBI_DISPLAY_NAME=Coccidioides immitis H538.4
+coccidioides_immitis_h5384_DBEST_VER=2010-06-17
+coccidioides_immitis_h5384_TAXON_HIERARCHY_FOR_BLASTX=Eukaryota Fungi Ascomycota
+coccidioides_immitis_h5384_GO_ASSOCIATIONS_VER=3
+
+# Cryptococcus neoformans grubii (H99; Broad)
+cryptococcus_neoformans_grubii_h99_VER=2
+cryptococcus_neoformans_grubii_h99_GENOME_SOURCE=Broad
+cryptococcus_neoformans_grubii_h99_GENOME_SEQUENCE_VER=2
+cryptococcus_neoformans_grubii_h99_GENOME_SIZE=19000000
+cryptococcus_neoformans_grubii_h99_FUNGIDB_DISPLAY_NAME=Cryptococcus neoformans var. grubii (H99)
+cryptococcus_neoformans_grubii_h99_FUNGIDB_ABBREVIATION=CneoH99
+cryptococcus_neoformans_grubii_h99_NCBI_TAXONOMY_ID=235443
+cryptococcus_neoformans_grubii_h99_NCBI_PARENT_TAXONOMY_ID=178876
+cryptococcus_neoformans_grubii_h99_NCBI_DISPLAY_NAME=Cryptococcus neoformans var. grubii H99
+cryptococcus_neoformans_grubii_h99_DBEST_VER=2010-06-17
+cryptococcus_neoformans_grubii_h99_TAXON_HIERARCHY_FOR_BLASTX=Eukaryota Fungi Basidiomycota
+cryptococcus_neoformans_grubii_h99_GO_ASSOCIATIONS_VER=2
+
+# Fusarium graminearum (unknown; Broad)
+fusarium_graminearum_na_VER=3
+fusarium_graminearum_na_GENOME_SOURCE=Broad
+fusarium_graminearum_na_GENOME_SEQUENCE_VER=3
+fusarium_graminearum_na_GENOME_SIZE=37000000
+fusarium_graminearum_na_FUNGIDB_DISPLAY_NAME=Fusarium graminearum
+fusarium_graminearum_na_FUNGIDB_ABBREVIATION=FgraNA
+fusarium_graminearum_na_NCBI_TAXONOMY_ID=569360
+fusarium_graminearum_na_NCBI_PARENT_TAXONOMY_ID=5518
+fusarium_graminearum_na_NCBI_DISPLAY_NAME=Fusarium graminearum species complex
+fusarium_graminearum_na_DBEST_VER=2010-06-17
+fusarium_graminearum_na_TAXON_HIERARCHY_FOR_BLASTX=Eukaryota Fungi Ascomycota
+fusarium_graminearum_na_GO_ASSOCIATIONS_VER=3
+
+# Fusarium oxysporum lycopersici (4287; Broad)
+fusarium_oxysporum_lycopersici_4287_VER=2
+fusarium_oxysporum_lycopersici_4287_GENOME_SOURCE=Broad
+fusarium_oxysporum_lycopersici_4287_GENOME_SEQUENCE_VER=2
+fusarium_oxysporum_lycopersici_4287_GENOME_SIZE=62000000
+fusarium_oxysporum_lycopersici_4287_FUNGIDB_DISPLAY_NAME=Fusarium oxysporum f. sp. lycopersici 4287
+fusarium_oxysporum_lycopersici_4287_FUNGIDB_ABBREVIATION=FgraNA
+fusarium_oxysporum_lycopersici_4287_NCBI_TAXONOMY_ID=426428
+fusarium_oxysporum_lycopersici_4287_NCBI_PARENT_TAXONOMY_ID=5507
+fusarium_oxysporum_lycopersici_4287_NCBI_DISPLAY_NAME=Fusarium oxysporum f. sp. lycopersici
+fusarium_oxysporum_lycopersici_4287_DBEST_VER=2010-06-17
+fusarium_oxysporum_lycopersici_4287_TAXON_HIERARCHY_FOR_BLASTX=Eukaryota Fungi Ascomycota
+fusarium_oxysporum_lycopersici_4287_GO_ASSOCIATIONS_VER=3
+
+# Fusarium verticillioides (unknown; Broad)
+fusarium_verticillioides_na_VER=3
+fusarium_verticillioides_na_GENOME_SOURCE=Broad
+fusarium_verticillioides_na_GENOME_SEQUENCE_VER=3
+fusarium_verticillioides_na_GENOME_SIZE=42000000
+fusarium_verticillioides_na_FUNGIDB_DISPLAY_NAME=Fusarium verticillioides
+fusarium_verticillioides_na_FUNGIDB_ABBREVIATION=FverNA
+fusarium_verticillioides_na_NCBI_TAXONOMY_ID=117187
+fusarium_verticillioides_na_NCBI_PARENT_TAXONOMY_ID=117187
+fusarium_verticillioides_na_NCBI_DISPLAY_NAME=Fusarium verticillioides
+fusarium_verticillioides_na_DBEST_VER=2010-06-17
+fusarium_verticillioides_na_TAXON_HIERARCHY_FOR_BLASTX=Eukaryota Fungi Ascomycota
+fusarium_verticillioides_na_GO_ASSOCIATIONS_VER=3
+
+# Magnaporthe oryzae (70-15; Broad)
+magnaporthe_oryzae_7015_VER=6
+magnaporthe_oryzae_7015_GENOME_SOURCE=Broad
+magnaporthe_oryzae_7015_GENOME_SEQUENCE_VER=6
+magnaporthe_oryzae_7015_GENOME_SIZE=42000000
+magnaporthe_oryzae_7015_FUNGIDB_DISPLAY_NAME=Magnaporthe oryzae (70-15)
+magnaporthe_oryzae_7015_FUNGIDB_ABBREVIATION=Mory7015
+magnaporthe_oryzae_7015_NCBI_TAXONOMY_ID=242507
+magnaporthe_oryzae_7015_NCBI_PARENT_TAXONOMY_ID=148303
+magnaporthe_oryzae_7015_NCBI_DISPLAY_NAME=Magnaporthe oryzae (70-15)
+magnaporthe_oryzae_7015_DBEST_VER=2010-06-17
+magnaporthe_oryzae_7015_TAXON_HIERARCHY_FOR_BLASTX=Eukaryota Fungi Ascomycota
+magnaporthe_oryzae_7015_GO_ASSOCIATIONS_VER=3
+
+# Neurospora crassa (OR74A; Broad)
+neurospora_crassa_or74a_VER=10
+neurospora_crassa_or74a_GENOME_SOURCE=Broad
+neurospora_crassa_or74a_GENOME_SEQUENCE_VER=10
+neurospora_crassa_or74a_GENOME_SIZE=40000000
+neurospora_crassa_or74a_FUNGIDB_DISPLAY_NAME=Neurospora crassa (OR74A)
+neurospora_crassa_or74a_FUNGIDB_ABBREVIATION=NcraOR74A
+neurospora_crassa_or74a_NCBI_TAXONOMY_ID=367110
+neurospora_crassa_or74a_NCBI_PARENT_TAXONOMY_ID=5141
+neurospora_crassa_or74a_NCBI_DISPLAY_NAME=Neurospora crassa OR74A
+neurospora_crassa_or74a_DBEST_VER=2010-06-17
+neurospora_crassa_or74a_TAXON_HIERARCHY_FOR_BLASTX=Eukaryota Fungi Ascomycota
+neurospora_crassa_or74a_GO_ASSOCIATIONS_VER=10
+
+# Neosartorya fischeri (NRRL 181; Broad)
+neosartorya_fischeri_nrrl181_VER=1
+neosartorya_fischeri_nrrl181_GENOME_SOURCE=Broad
+neosartorya_fischeri_nrrl181_GENOME_SEQUENCE_VER=1
+neosartorya_fischeri_nrrl181_GENOME_SIZE=33000000
+neosartorya_fischeri_nrrl181_FUNGIDB_DISPLAY_NAME=Neosartorya fischeri NRRL 181
+neosartorya_fischeri_nrrl181_FUNGIDB_ABBREVIATION=NfisNRRL181
+neosartorya_fischeri_nrrl181_NCBI_TAXONOMY_ID=331117
+neosartorya_fischeri_nrrl181_NCBI_PARENT_TAXONOMY_ID=36630
+neosartorya_fischeri_nrrl181_NCBI_DISPLAY_NAME=Neosartorya fischeri NRRL 181
+neosartorya_fischeri_nrrl181_DBEST_VER=2010-06-17
+neosartorya_fischeri_nrrl181_TAXON_HIERARCHY_FOR_BLASTX=Eukaryota Fungi Ascomycota
+neosartorya_fischeri_nrrl181_GO_ASSOCIATIONS_VER=3
+
+# Puccinia graminis (CRL 75-36-700-3; Broad)
+puccinia_graminis_tritici_crl75367003_VER=2
+puccinia_graminis_tritici_crl75367003_GENOME_SOURCE=Broad
+puccinia_graminis_tritici_crl75367003_GENOME_SEQUENCE_VER=2
+puccinia_graminis_tritici_crl75367003_GENOME_SIZE=90000000
+puccinia_graminis_tritici_crl75367003_FUNGIDB_DISPLAY_NAME=Puccinia graminis (CRL 75-36-700-3)
+puccinia_graminis_tritici_crl75367003_FUNGIDB_ABBREVIATION=PgraCRL75367003
+#puccinia_graminis_tritici_crl75367003_NCBI_TAXONOMY_ID=418459
+puccinia_graminis_tritici_crl75367003_NCBI_TAXONOMY_ID=331117
+puccinia_graminis_tritici_crl75367003_NCBI_PARENT_TAXONOMY_ID=5397
+puccinia_graminis_tritici_crl75367003_NCBI_DISPLAY_NAME=Puccinia graminis tritici f. sp. CRL 75-36-700-3
+puccinia_graminis_tritici_crl75367003_DBEST_VER=2010-06-17
+puccinia_graminis_tritici_crl75367003_TAXON_HIERARCHY_FOR_BLASTX=Eukaryota Fungi Ascomycota
+puccinia_graminis_tritici_crl75367003_GO_ASSOCIATIONS_VER=3
+
+# Rhizopus oryzae (99-880; Broad)
+rhizopus_oryzae_99880_VER=3
+rhizopus_oryzae_99880_GENOME_SOURCE=Broad
+rhizopus_oryzae_99880_GENOME_SEQUENCE_VER=3
+rhizopus_oryzae_99880_GENOME_SIZE=47000000
+rhizopus_oryzae_99880_FUNGIDB_DISPLAY_NAME=Rhizopus oryzae (99-880)
+rhizopus_oryzae_99880_FUNGIDB_ABBREVIATION=Rory99880
+rhizopus_oryzae_99880_NCBI_TAXONOMY_ID=246409
+rhizopus_oryzae_99880_NCBI_PARENT_TAXONOMY_ID=64495
+rhizopus_oryzae_99880_NCBI_DISPLAY_NAME=Rhizopus oryzae RA 99-880
+rhizopus_oryzae_99880_DBEST_VER=2010-06-17
+rhizopus_oryzae_99880_TAXON_HIERARCHY_FOR_BLASTX=Eukaryota Fungi Ascomycota
+rhizopus_oryzae_99880_GO_ASSOCIATIONS_VER=3
+
+# Saccharomyces cerevisiae (S288c; SGD)
+saccharomyces_cerevisiae_s288c_VER=2010-11-16
+saccharomyces_cerevisiae_s288c_GENOME_SOURCE=SGD
+saccharomyces_cerevisiae_s288c_GENOME_SEQUENCE_VER=2011-01-05
+saccharomyces_cerevisiae_s288c_GENOME_SIZE=12000000
+saccharomyces_cerevisiae_s288c_FUNGIDB_DISPLAY_NAME=Saccharomyces cerevisiae (S288C)
+saccharomyces_cerevisiae_s288c_FUNGIDB_ABBREVIATION=ScerS288C
+saccharomyces_cerevisiae_s288c_NCBI_TAXONOMY_ID=559292
+saccharomyces_cerevisiae_s288c_NCBI_PARENT_TAXONOMY_ID=4932
+saccharomyces_cerevisiae_s288c_NCBI_DISPLAY_NAME=Saccharomyces cerevisiae S288c
+saccharomyces_cerevisiae_s288c_DBEST_VER=2010-06-17
+saccharomyces_cerevisiae_s288c_TAXON_HIERARCHY_FOR_BLASTX=Eukaryota Fungi Ascomycota
+saccharomyces_cerevisiae_s288c_GO_ASSOCIATIONS_VER=2010-11-16
+
+
+
+# Aspergillus fumigatus (AspGD: DUPLICATE OF BROAD)
+aspergillus_fumigatus_af293_aspgd_VER=unknown
+aspergillus_fumigatus_af293_aspgd_GENOME_SOURCE=AspGD
+aspergillus_fumigatus_af293_aspgd_GENOME_SEQUENCE_VER=unknown
+aspergillus_fumigatus_af293_aspgd_GENOME_SIZE=28000000
+aspergillus_fumigatus_af293_aspgd_FUNGIDB_DISPLAY_NAME=Aspergillus fumigatus (AF293)
+aspergillus_fumigatus_af293_aspgd_FUNGIDB_ABBREVIATION=AfumAF293
+aspergillus_fumigatus_af293_aspgd_NCBI_TAXONOMY_ID=330879
+aspergillus_fumigatus_af293_aspgd_NCBI_PARENT_TAXONOMY_ID=5085
+aspergillus_fumigatus_af293_aspgd_DBEST_VER=2010-06-17
+aspergillus_fumigatus_af293_aspgd_TAXON_HIERARCHY_FOR_BLASTX=Eukaryota Fungi Ascomycota
+aspergillus_fumigatus_af293_aspgd_GO_ASSOCIATIONS_VER=unknown
+
+
+# Phanerochaete chrysosporium (JGI)
+phanerochaete_chrysosporium_rp78_VER=2.0
+phanerochaete_chrysosporium_rp78_GENOME_SOURCE=JGI
+phanerochaete_chrysosporium_rp78_GENOME_SEQUENCE_VER=2.0
+phanerochaete_chrysosporium_rp78_GENOME_SIZE=35000000
+phanerochaete_chrysosporium_rp78_FUNGIDB_DISPLAY_NAME=Phanerochaete chrysosporium (RP-78)
+phanerochaete_chrysosporium_rp78_FUNGIDB_ABBREVIATION=PchrRP78
+phanerochaete_chrysosporium_rp78_NCBI_TAXONOMY_ID=273507
+phanerochaete_chrysosporium_rp78_NCBI_PARENT_TAXONOMY_ID=5304
+phanerochaete_chrysosporium_rp78_DBEST_VER=2010-06-17
+phanerochaete_chrysosporium_rp78_TAXON_HIERARCHY_FOR_BLASTX=Eukaryota 
+phanerochaete_chrysosporium_rp78_GO_ASSOCIATIONS_VER=2.0
+
+
+
+###comparative genomics
+
+# Finished genomes
+mercatorDraftGenomes=
+mercatorDraftExternalDbSpec=
+
+# Assembled genomes
+mercatorNonDraftGenomes = saccharomyces_cerevisiae_s288c,aspergillus_clavatus_nrrl1,aspergillus_flavus_na,aspergillus_fumigatus_af293_na,aspergillus_nidulans_a4,aspergillus_nidulans_a4_aspgd_na,aspergillus_niger_na,aspergillus_terreus_na,candida_albicans_sc5314,coccidioides_immitis_rs,coccidioides_immitis_h5384,cryptococcus_neoformans_grubii_h99,fusarium_graminearum_na,fusarium_oxysporum_lycopersici_4287,fusarium_verticillioides_na,magnaporthe_oryzae_7015,neurospora_crassa_or74a,neosartorya_fischeri_nrrl181,puccinia_graminis_tritici_crl75367003,rhizopus_oryzae_99880
+
+# resource name and external database release in same order as above
+mercatorNonDraftExternalDbSpec = saccharomyces_cerevisiae_s288c_genome_sequence_RSRC|2011-01-05,aspergillus_clavatus_nrrl1_genome_sequence_RSRC|1,aspergillus_flavus_na_genome_sequence_RSRC|2,aspergillus_fumigatus_af293_na_genome_sequence_RSRC|2,aspergillus_nidulans_a4_genome_sequence_RSRC|1,aspergillus_nidulans_a4_aspgd_na_genome_sequence_RSRC|2011-01-05,aspergillus_niger_na_genome_sequence_RSRC|1,aspergillus_terreus_na_genome_sequence_RSRC|1,candida_albicans_sc5314_genome_sequence_RSRC|A21,coccidioides_immitis_rs_genome_sequence_RSRC|3,coccidioides_immitis_h5384_genome_sequence_RSRC|1,cryptococcus_neoformans_grubii_h99_genome_sequence_RSRC|2,fusarium_graminearum_na_genome_sequence_RSRC|3,fusarium_oxysporum_lycopersici_4287_genome_sequence_RSRC|2,fusarium_verticillioides_na_genome_sequence_RSRC|3,magnaporthe_oryzae_7015_genome_sequence_RSRC|6,neurospora_crassa_or74a_genome_sequence_RSRC|10,neosartorya_fischeri_nrrl181_genome_sequence_RSRC|1,puccinia_graminis_tritici_crl75367003_genome_sequence_RSRC|2,rhizopus_oryzae_99880_genome_sequence_RSRC|3,
+
+
+# These are here to load contigs into sequences and assemble into virtual sequences, numbers should match
+mercatorDraftSeqTables=
+mercatorNonDraftSeqTables = DoTS.ExternalNASequence,DoTS.ExternalNASequence,DoTS.ExternalNASequence,DoTS.ExternalNASequence,DoTS.ExternalNASequence,DoTS.ExternalNASequence,DoTS.ExternalNASequence,DoTS.ExternalNASequence,DoTS.ExternalNASequence,DoTS.ExternalNASequence,DoTS.ExternalNASequence
+
+# Path to mercator directory, same for us
+cndSrcBin = /files/software/cndsrc/current/bin/
+mavidExe = /files/software/mavid/current/mavid/mavid
+mercatorSyntenyVersion=1.0
+

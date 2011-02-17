@@ -1,0 +1,98 @@
+######### Psipred ######################################
+ApiCommonWorkflow/Main/WorkflowSteps/RunPfilt.psipredPath = /files/software/psipred/current/bin
+ApiCommonWorkflow/Main/WorkflowSteps/MakePsipredTaskDir.taskSize = 1
+ApiCommonWorkflow/Main/WorkflowSteps/MakePsipredTaskDir.clusterpath = /genomics/share/src/bio/psipred/current
+ApiCommonWorkflow/Main/WorkflowSteps/MakePsipredTaskDir.ncbibin = /genomics/share/src/bio/ncbi/bin
+
+ApiCommonWorkflow/Main/WorkflowSteps/MakeAlgInv.psipredVersion = 2.5
+
+
+####### TMHMM ######################################
+ApiCommonWorkflow/Main/WorkflowSteps/RunTmhmm.binPath = /files/software/TMHMM/current/bin/tmhmm
+ApiCommonWorkflow/Main/WorkflowSteps/InsertTmhmm.version = 2.0a 
+
+
+####### SignalP ######################################
+ApiCommonWorkflow/Main/WorkflowSteps/RunSignalP.binPath = /files/software/signalp/current/signalp
+ApiCommonWorkflow/Main/WorkflowSteps/InsertSignalP.version = 3.0 
+
+
+####### BLAST ######################################
+ApiCommonWorkflow/Main/WorkflowSteps/MakeBlastTaskInputDir.taskSize=1
+ApiCommonWorkflow/Main/WorkflowSteps/MakeBlastTaskInputDir.wuBlastBinPathCluster =/genomics/share/pkg/bio/wu-blast/current
+ApiCommonWorkflow/Main/WorkflowSteps/MakeBlastTaskInputDir.ncbiBlastBinPathCluster =/genomics/share/pkg/bio/???
+
+
+##### Tandem Repeats #############
+ApiCommonWorkflow/Main/WorkflowSteps/FindTandemRepeats.trfPath = /files/software/TRF/bin
+
+
+######## Low Complexity ##################
+ApiCommonWorkflow/Main/WorkflowSteps/RunLowComplexityFilter.wuBlastPath = /files/software/wu-blast2/current
+
+
+####### DoTs Assemblies ###################################
+ApiCommonWorkflow/Main/WorkflowSteps/MakeAndLoadAssemblies.cap4Dir = /files/software/cap4/current/bin.x86-linux-2.2
+
+
+####### Make Assembly Seqs ###################################
+ApiCommonWorkflow/Main/WorkflowSteps/MakeAssemblySeqs.vectorFile=/files/cbil/data/thirdparty/repeat/vector/download_7.14.03/vector
+ApiCommonWorkflow/Main/WorkflowSteps/MakeAssemblySeqs.phrapDir=/files/cbil/software/phrap/current
+
+####### Make Assembly Seqs From Predicted Transcripts###################################
+ApiCommonWorkflow/Main/WorkflowSteps/MakeAssemblySeqsFromPredictedTranscripts.vectorFile=/files/cbil/data/thirdparty/repeat/vector/download_7.14.03/vector
+ApiCommonWorkflow/Main/WorkflowSteps/MakeAssemblySeqsFromPredictedTranscripts.phrapDir=/files/cbil/software/phrap/current
+
+######### Interpro ############################################
+ApiCommonWorkflow/Main/WorkflowSteps/MakeInterproTaskInputDir.taskSize = 25
+ApiCommonWorkflow/Main/WorkflowSteps/MakeInterproTaskInputDir.applications = blastprodom,hmmpir,hmmpfam,hmmsmart,hmmtigr,profilescan,superfamily,fprintscan
+
+
+######### RepeatMask ############################################
+ApiCommonWorkflow/Main/WorkflowSteps/MakeRepeatMaskTaskInputDir.taskSize=150
+ApiCommonWorkflow/Main/WorkflowSteps/MakeRepeatMaskTaskInputDir.rmPath=/genomics/share/src/bio/RepeatMasker/RepeatMasker-open-3-1-5
+
+
+######### GfClient ############################################
+ApiCommonWorkflow/Main/WorkflowSteps/MakeGfClientTaskInputDir.taskSize=150
+ApiCommonWorkflow/Main/WorkflowSteps/MakeGfClientTaskInputDir.gaBinPath=/genomics/share/bin/
+
+##########formatDownloadFile#######################################3
+ApiCommonWorkflow/Main/WorkflowSteps/FormatDownloadFile.wuBlastPath=/files/software/wu-blast2/current
+
+###############formatNcbiBlastFile############################
+ApiCommonWorkflow/Main/WorkflowSteps/FormatNcbiBlastFile.ncbiBlastPath=/files/software/ncbi-blast2/current
+
+###### CreateEpitopeMapFile #################################
+
+ApiCommonWorkflow/Main/WorkflowSteps/CreateEpitopeMapFile.ncbiBlastPath=/files/software/ncbi-blast2/current
+
+####################MakePsipredTaskDir#######################################
+ApiCommonWorkflow/Main/WorkflowSteps/MakePsipredTaskDir.ncbiBinPath = /genomics/share/src/bio/ncbi/bin
+ApiCommonWorkflow/Main/WorkflowSteps/MakePsipredTaskDir.psipredPath = /files/software/psipred/current/bin
+######################Run Tuning Manager####################
+ApiCommonWorkflow/Main/WorkflowSteps/RunTuningManager.apidbPassword=po34weep
+
+####### ExportPred ######################################
+ApiCommonWorkflow/Main/WorkflowSteps/RunExportPred.binPath = /files/software/exportpred
+
+####### TRNA ######################################
+ApiCommonWorkflow/Main/WorkflowSteps/MakeTrnaScanTaskInputDir.taskSize=1
+ApiCommonWorkflow/Main/WorkflowSteps/MakeTrnaScanTaskInputDir.tRNAscanDir =/gpfs/fs0/share/bin/
+
+####### Mummer ######################################
+ApiCommonWorkflow/Main/WorkflowSteps/RunMummer.mummerPath=/files/software/MUMmer/current/
+
+####### RunMDust ######################################
+ApiCommonWorkflow/Main/WorkflowSteps/RunMDust.mdustPath=/files/software/mdust/mdust/mdust
+
+####### MakeRUMTaskInputDir ######################################
+ApiCommonWorkflow/Main/WorkflowSteps/MakeRUMTaskInputDir.taskSize=200000
+ApiCommonWorkflow/Main/WorkflowSteps/MakeRUMTaskInputDir.bowtieBinDir=/home/brunkb/bin/bowtie
+ApiCommonWorkflow/Main/WorkflowSteps/MakeRUMTaskInputDir.blatExec=blat
+ApiCommonWorkflow/Main/WorkflowSteps/MakeRUMTaskInputDir.mdustExec=mdust
+ApiCommonWorkflow/Main/WorkflowSteps/MakeRUMTaskInputDir.perlScriptsDir=/gpfs/fs0/u/weili1/GUS_BUILD/projects/GGTools/SSA/bin
+
+####### MakeAndMask ######################################
+ApiCommonWorkflow/Main/WorkflowSteps/MakeSoftMaskTaskInputDir.taskSize=1
+ApiCommonWorkflow/Main/WorkflowSteps/MakeSoftMaskTaskInputDir.rmPath=/genomics/share/src/bio/RepeatMasker/RepeatMasker-open-3-1-5

@@ -1,0 +1,5 @@
+name=FungiDB
+version=0.2-miniflow-analysis
+workflowXmlFile=fungidb/fungiWorkflow-analysis.xml
+workflowTable=apidb.workflow
+workflowStepTable=apidb.workflowstep
