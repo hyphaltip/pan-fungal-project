@@ -1,0 +1,60 @@
+[Agaricus bisporus var bisporus (H97) v2.0]
+base=http://genome.jgi-psf.org/Agabi_varbisH97_2/download/
+protein=Abisporus_varbisporusH97.v2.FilteredModels3.proteins.fasta.gz
+dna=Abisporus_varbisporusH97.v2_AssembledScaffolds.fasta.gz
+gtf=Abisporus_varbisporusH97.v2.FilteredModels3.gff.gz
+cds=Abisporus_varbisporusH97.v2.FilteredModels3.CDS.fasta.gz
+pep=Abisporus_varbisporusH97.v2.FilteredModels3.proteins.fasta.gz
+ecinfo=Abisporus_varbisporusH97.v2.ecpathwayinfo_FilteredModels3.tab.gz
+all_gtf=Abisporus_varbisporusH97.v2.allModels.gff.gz
+ESTs=Abisporus_varbisporusH97.v2.ESTs.fasta.gz
+
+[
+http://genome.jgi-psf.org/Agabi_varbur_1/Agabi_varbur_1.download.ftp.html	Agaricus bisporus var. burnettii JB137-S8	Y
+http://genome.jgi-psf.org/Altbr1/Altbr1.download.ftp.html	Alternaria brassicicola	N
+http://genome.jgi-psf.org/Aspca3/Aspca3.download.ftp.html	Aspergillus carbonarius ITEM 5010 v3	Y
+http://genome.jgi-psf.org/Aspca1/Aspca1.download.ftp.html	Aspergillus carbonarius v1.0	Y
+http://genome.jgi-psf.org/Aspni5/Aspni5.download.ftp.html	Aspergillus niger v3.0	Y
+http://genome.jgi-psf.org/Batde5/Batde5.download.ftp.html	Batrachochytrium dendrobatidis JAM81	Y
+http://genome.jgi-psf.org/Cersu1/Cersu1.download.ftp.html	Ceriporiopsis subvermispora B	Y
+http://genome.jgi-psf.org/Chagl_1/Chagl_1.download.ftp.html	Chaetomium globosum v1.0	Y
+http://genome.jgi-psf.org/CocheC5_1/CocheC5_1.download.ftp.html	Cochliobolus heterostrophus C5	Y
+http://genome.jgi-psf.org/Copci1/Copci1.download.ftp.html	Coprinopsis cinerea	N
+http://genome.jgi-psf.org/Crypa2/Crypa2.download.ftp.html	Cryphonectria parasitica EP155 v2.0	Y
+http://genome.jgi-psf.org/Cryne_H99_1/Cryne_H99_1.download.ftp.html	Cryptococcus neoformans var. grubii H99	N
+http://genome.jgi-psf.org/Hanpo1/Hanpo1.download.ftp.html	Hansenula polymorpha NCYC 495 leu1.1	Y
+http://genome.jgi-psf.org/Hetan1/Hetan1.download.ftp.html	Heterobasidion annosum v1.0	Y
+http://genome.jgi-psf.org/Hetan2/Hetan2.download.ftp.html	Heterobasidion annosum v2.0	Y
+http://genome.jgi-psf.org/Lacbi1/Lacbi1.download.ftp.html	Laccaria bicolor	Y
+http://genome.jgi-psf.org/Malgl1/Malgl1.download.ftp.html	Malassezia globosa	N
+http://genome.jgi-psf.org/Mellp1/Mellp1.download.ftp.html	Melampsora laricis-populina v1.0	Y
+http://genome.jgi-psf.org/Mucci2/Mucci2.download.ftp.html	Mucor circinelloides CBS277.49, v2.0	Y
+http://genome.jgi-psf.org/Mycfi2/Mycfi2.download.ftp.html	Mycosphaerella fijiensis v2.0	Y
+http://genome.jgi-psf.org/Mycgr3/Mycgr3.download.ftp.html	Mycosphaerella graminicola v2.0	Y
+http://genome.jgi-psf.org/Necha2/Necha2.download.ftp.html	Nectria haematococca v2.0	Y
+http://genome.jgi-psf.org/Neudi1/Neudi1.download.ftp.html	Neurospora discreta FGSC 8579 mat A, v1.0	Y
+http://genome.jgi-psf.org/Neute_matA2/Neute_matA2.download.ftp.html	Neurospora tetrasperma FGSC 2508 mat A v2.0	Y
+http://genome.jgi-psf.org/Neute_mat_a1/Neute_mat_a1.download.ftp.html	Neurospora tetrasperma FGSC 2509 mat a v1.0	Y
+http://genome.jgi-psf.org/Phchr1/Phchr1.download.ftp.html	Phanerochaete chrysosporium v2.0	Y
+http://genome.jgi-psf.org/Phybl2/Phybl2.download.ftp.html	Phycomyces blakesleeanus NRRL1555 v2.0	Y
+http://genome.jgi-psf.org/PhycaF7/PhycaF7.download.ftp.html	Phytophthora capsici v1.0	Y
+http://genome.jgi-psf.org/Phyra1_1/Phyra1_1.download.ftp.html	Phytophthora ramorum v1.1	Y
+http://genome.jgi-psf.org/Physo1_1/Physo1_1.download.ftp.html	Phytophthora sojae v1.1	Y
+http://genome.jgi-psf.org/Picst3/Picst3.download.ftp.html	Pichia stipitis v2.0	Y
+http://genome.jgi-psf.org/PleosPC15_2/PleosPC15_2.download.ftp.html	Pleurotus ostreatus PC15 v2.0	Y
+http://genome.jgi-psf.org/PleosPC9_1/PleosPC9_1.download.ftp.html	Pleurotus ostreatus PC9 v1.0	Y
+http://genome.jgi-psf.org/Pospl1/Pospl1.download.ftp.html	Postia placenta MAD-698	Y
+http://genome.jgi-psf.org/Pucgr1/Pucgr1.download.ftp.html	Puccinia graminis	N
+http://genome.jgi-psf.org/Pyrtr1/Pyrtr1.download.ftp.html	Pyrenophora tritici-repentis	N
+http://genome.jgi-psf.org/Schco1/Schco1.download.ftp.html	Schizophyllum commune v1.0	Y
+http://genome.jgi-psf.org/SerlaS7_3_2/SerlaS7_3_2.download.ftp.html	Serpula lacrymans S7.3 v2.0	Y
+http://genome.jgi-psf.org/Serla_S7_9/Serla_S7_9.download.ftp.html	Serpula lacrymans S7.9 v1.0	Y
+http://genome.jgi-psf.org/Spoth1/Spoth1.download.ftp.html	Sporotrichum thermophile v1.0	Y
+http://genome.jgi-psf.org/Sporo1/Sporo1.download.ftp.html	Sporobolomyces roseus v1.0	Y
+http://genome.jgi-psf.org/Stano1/Stano1.download.ftp.html	Stagonospora nodorum SN15	N
+http://genome.jgi-psf.org/Thite1/Thite1.download.ftp.html	Thielavia terrestris v1.0	Y
+http://genome.jgi-psf.org/Treme1/Treme1.download.ftp.html	Tremella mesenterica Fries v1.0	Y
+http://genome.jgi-psf.org/Triat2/Triat2.download.ftp.html	Trichoderma atroviride v2.0	Y
+http://genome.jgi-psf.org/Trire2/Trire2.download.ftp.html	Trichoderma reesei, v2.0	Y
+http://genome.jgi-psf.org/TriviGv29_8_2/TriviGv29_8_2.download.ftp.html	Trichoderma virens Gv29-8 v2.0	Y
+http://genome.jgi-psf.org/Ustma1/Ustma1.download.ftp.html	Ustilago maydis	Y
