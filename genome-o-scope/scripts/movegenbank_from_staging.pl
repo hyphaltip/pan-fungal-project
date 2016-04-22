@@ -13,13 +13,16 @@ use File::Rsync;
 my $SEP = ':';
 
 my ($force,$debug);
-my $taxdir = '/data/databases/taxonomy';
+my $taxdir = '/shared/stajichlab/db/taxonomy';
+my $dest_dir = '/project/genome_files/fungi';
 
 GetOptions(
 	   'f|force' => \$force,
 	   'd|debug' => \$debug,
 	   't|taxdir:s' => \$taxdir,
+	   'dest:s'     => \$dest_dir,
 	   );
+my $staging_dir = shift || '/tmp/genbank_staging';
 
 if( $force ) {
     unlink('/tmp/cache.idx');
@@ -39,8 +42,6 @@ my $taxdb = Bio::DB::Taxonomy->new(-source => 'flatfile',
                                    -directory => $taxdir,
                                    );
 
-my $dest_dir = '/project/genome_files/fungi';
-my $staging_dir = shift || '/tmp/genbank_staging';
 
 opendir(DIR,$staging_dir) || die "$staging_dir : $!";
 for my $dir ( readdir(DIR) ) {
