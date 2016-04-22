@@ -48,7 +48,7 @@ while(<QUERY>) {
 	    for(my $i = $s_number; $i <= $f_number; $i++) {
 		my $acc = sprintf("%s%0".$nl."d",$s_letter,$i);
 		if( -f File::Spec->catfile($basedir,$species,"$acc.gbk.gz")) {
-		    push @not, sprintf("NOT %s[ACCN]",$acc);
+		    push @not, sprintf("NOT %s",$acc);
 		} else {
 		    $keep++;
 		}
@@ -56,7 +56,7 @@ while(<QUERY>) {
 
 	} else {
 	    next if -f File::Spec->catfile($basedir,$species,"$start.gbk.gz");
-	    push @qstring, sprintf("%s[ACCN]",$start);
+	    push @qstring, sprintf("%s",$start);
 	    $keep++;
 	}
     }
